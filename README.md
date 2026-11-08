@@ -2,9 +2,12 @@
 
 **Live: https://razee4315.github.io/mobile-ui-demos/**
 
-Fifteen invented brands in three collections of mobile sign-in and sign-up concepts. Every screen is real HTML, CSS and JavaScript running inside CSS-built iPhone 15 Pro (393×852) and Pixel 8 (412×915) frames, so you can type, tap and poke the phones. No frameworks, no build step.
+Twenty invented brands in four collections of mobile sign-in and sign-up concepts. Every screen is real HTML, CSS and JavaScript running inside CSS-built iPhone 15 Pro (393×852) and Pixel 8 (412×915) frames, so you can type, tap and poke the phones. No frameworks, no build step.
 
 ## Collections
+
+### 04 · Small moments ([`small-moments/`](small-moments/index.html))
+Five living interfaces drawn in SVG, CSS and canvas, each with sign in, sign up, reset (inbox state and resend countdown) and a home screen: **Murmur** (AI companion orb), **Kin** (customer support crew that covers its eyes), **Inkling** (pocket animation studio with onion skins), **Draft** (whiteboard with wandering teammate cursors) and **Pulse** (calm uptime monitoring). Design rules for each are in [`small-moments/README.md`](small-moments/README.md) and `small-moments/refs/<name>/notes.md`.
 
 ### 03 · Sign in, but alive ([`series-2/`](series-2/index.html))
 Light, minimal, motion first.
@@ -45,6 +48,7 @@ index.html                 hub
 series-1.html, concept.html, concepts/<name>/screen.html     collection 01
 series-2/index.html, concept.html, concepts/<name>/screen.html, shared/kit.*   collection 03
 kitchens/index.html, themes/<theme>/, shared/                collection 02
+small-moments/index.html, themes/<name>/, shared/            collection 04
 shared/devices.*           iPhone + Android frames that wrap a live iframe
 assets/web, series-2/assets/web, kitchens/assets             shipped WebP art
 tools/                     Codex image pipeline + preview server

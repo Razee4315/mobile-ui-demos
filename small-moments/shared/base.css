@@ -1,0 +1,45 @@
+/* v2 structural layer. Themes own every visual decision through tokens. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; -webkit-tap-highlight-color: transparent; }
+img, svg, canvas { display: block; max-width: 100%; }
+img { height: auto; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+
+html { --safe-top: 24px; --safe-bottom: 16px; }
+html[data-device="ios"] { --safe-top: 56px; --safe-bottom: 30px; }
+html[data-device="android"] { --safe-top: 40px; --safe-bottom: 22px; }
+html[data-device="web"] body { display: grid; place-items: center; min-height: 100%; }
+html[data-device="web"] .app { width: min(100vw, 412px); height: min(100vh, 915px); }
+
+.app { position: relative; width: 100%; height: 100%; overflow: hidden; isolation: isolate; user-select: none; -webkit-user-select: none; }
+.app input { user-select: text; -webkit-user-select: text; }
+.screen { position: absolute; inset: 0; overflow-x: hidden; overflow-y: auto; visibility: hidden; padding: var(--safe-top) 0 var(--safe-bottom); scrollbar-width: none; }
+.screen::-webkit-scrollbar { display: none; }
+.screen.is-active { visibility: visible; z-index: 2; }
+/* Set by app.js when an auth screen is taller than the device */
+.screen.fit { zoom: var(--fit, 1); padding-top: calc(var(--safe-top) / var(--fit, 1)); padding-bottom: calc(var(--safe-bottom) / var(--fit, 1)); }
+.screen.leave { z-index: 1; pointer-events: none; }
+.stage { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.stage .hit { pointer-events: auto; }
+
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[data-screen="forgot"] [data-when="sent"] { display: none; }
+[data-screen="forgot"][data-state="sent"] [data-when="sent"] { display: block; }
+[data-screen="forgot"][data-state="sent"] [data-when="form"] { display: none; }
+.field-error:empty { display: none; }
+.btn { position: relative; text-decoration: none; }
+.btn .spinner { display: none; }
+.btn.is-loading .btn-label { opacity: 0; }
+.btn.is-loading .spinner { display: block; position: absolute; inset: 0; margin: auto; }
+
+/* stagger-in helper: children with [data-in] rise when their screen enters */
+.screen.enter [data-in] { animation: v2-in var(--in-ms, 620ms) var(--in-ease, cubic-bezier(.2,.8,.2,1)) both; animation-delay: calc(var(--i, 0) * var(--in-gap, 55ms) + var(--in-delay, 80ms)); }
+@keyframes v2-in { from { opacity: 0; transform: translateY(var(--in-y, 14px)); filter: blur(var(--in-blur, 4px)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

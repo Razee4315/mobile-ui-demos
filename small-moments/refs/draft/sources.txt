@@ -1,0 +1,8 @@
+01-named-cursors.jpg  https://dribbble.com/shots/16305020-Great-things-begin-with-a-connection  (Great things begin with a connection)
+02-live-collab-cursor.jpg  https://dribbble.com/shots/25353015-Live-Collaboration-for-Datawrapper  (Live Collaboration for Datawrapper)
+03-minimal-sticky-notes.jpg  https://dribbble.com/shots/24968356-Minimal-Whiteboard-Sticky-Notes  (Minimal Whiteboard: Sticky Notes)
+04-canvas-comments.jpg  https://dribbble.com/shots/24981141-Minimal-Whiteboard-Comments  (Minimal Whiteboard: Comments)
+05-pen-stroke-on-grid.jpg  https://dribbble.com/shots/21227498-Select-Pen-P-Virtual-Whiteboard  (Select Pen "P" | Virtual Whiteboard)
+06-toolbar-press-depth.jpg  https://dribbble.com/shots/23304261-Toolbar-button-depth  (Toolbar button depth)  [motion]
+07-collaborators-menu.jpg  https://dribbble.com/shots/24962393-Minimal-Whiteboard-Collaboration  (Minimal Whiteboard: Collaboration)
+08-line-arrow-tool.jpg  https://dribbble.com/shots/18267480-Aha-Create-Line-and-arrow-menu  (Aha! Create - Line and arrow menu)

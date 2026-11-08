@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Murmur — Think Out Loud</title>
+<meta name="theme-color" content="#FBF8F4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ======================= SIGN IN ======================= -->
+<section class="screen" data-screen="signin" aria-labelledby="si-title">
+  <div class="top" data-in="0"><span class="wordmark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 5C9-2 0 9 6 17s18 2 14-7S7 3 7 11s10 7 10 0"/></svg>murmur</span></div>
+  <div class="si-hero">
+    <div class="anchor" data-anchor aria-hidden="true"></div>
+    <p class="whisper" aria-live="polite" data-in="1"><span data-whisper>I’m listening.</span></p>
+    <div class="si-copy">
+      <h1 class="display" id="si-title" data-in="2">Think out <em>loud.</em></h1>
+      <p class="lede" data-in="3">Pick up the conversation where you left it.</p>
+    </div>
+  </div>
+  <form class="form shake-target" data-form="signin" data-next="home">
+    <div class="field" data-in="4">
+      <label for="si-id">Email or phone</label>
+      <div class="control"><input id="si-id" type="text" inputmode="email" autocomplete="username" required data-kind="email-or-phone" data-demo-bad="ana@murmur" placeholder="you@example.com" aria-describedby="si-id-err"></div>
+      <p class="field-error" id="si-id-err" role="alert"></p>
+    </div>
+    <div class="field" data-in="5">
+      <div class="row"><label for="si-pw">Password</label><a href="#forgot" class="link" data-go="forgot" style="font-size:13px">Forgot?</a></div>
+      <div class="control"><input id="si-pw" type="password" autocomplete="current-password" required data-minlength="6" placeholder="Your password" aria-describedby="si-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph ph-eye"></i><i class="ph ph-eye-slash"></i></button></div>
+      <p class="field-error" id="si-pw-err" role="alert"></p>
+    </div>
+    <div data-in="6" style="margin-top:20px"><button class="btn" type="submit"><span class="btn-label">Continue <i class="ph ph-arrow-right" aria-hidden="true"></i></span><span class="spinner dots" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
+    <div class="or" data-in="7">or</div>
+    <div class="socials" data-in="8">
+      <button type="button" class="btn-ghost" data-social="Apple"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-ghost" data-social="Google"><i class="ph ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot" data-in="9">New here? <a href="#signup" class="link" data-go="signup">Create an account</a></p>
+</section>
+
+<!-- ======================= SIGN UP ======================= -->
+<section class="screen" data-screen="signup" aria-labelledby="su-title">
+  <div class="top" data-in="0"><button class="back" data-go="signin" aria-label="Back to sign in"><i class="ph ph-arrow-left"></i></button></div>
+  <div class="su-head">
+    <div class="anchor" data-anchor aria-hidden="true"></div>
+    <h1 class="display" id="su-title" data-in="1" aria-live="polite"><span data-hello>Let’s get to know <em>each other.</em></span></h1>
+    <p class="lede" data-in="2" style="max-width:290px">Murmur remembers what matters to you, and only you.</p>
+  </div>
+  <form class="form shake-target" data-form="signup" data-next="home" style="padding-top:4px">
+    <div class="field" data-in="3">
+      <label for="su-name">What should I call you?</label>
+      <div class="control"><input id="su-name" type="text" autocomplete="given-name" required placeholder="Ana" data-msg-empty="A first name is plenty" aria-describedby="su-name-err"></div>
+      <p class="field-error" id="su-name-err" role="alert"></p>
+    </div>
+    <div class="field" data-in="4">
+      <label for="su-email">Email</label>
+      <div class="control"><input id="su-email" type="email" autocomplete="email" required placeholder="you@example.com" data-demo-bad="ana@murmur" aria-describedby="su-email-err"></div>
+      <p class="field-error" id="su-email-err" role="alert"></p>
+    </div>
+    <div class="field" data-in="5" style="margin-bottom:10px">
+      <label for="su-pw">Password</label>
+      <div class="control"><input id="su-pw" type="password" autocomplete="new-password" required data-minlength="8" data-strength="su-meter" placeholder="8 or more characters" aria-describedby="su-meter su-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph ph-eye"></i><i class="ph ph-eye-slash"></i></button></div>
+      <p class="field-error" id="su-pw-err" role="alert"></p>
+    </div>
+    <div class="meter" id="su-meter" data-level="0" aria-live="polite" data-in="6" data-labels="A little thin|A start|Getting there|A sturdy thought|Unbreakable" data-empty="Letters, a number, a symbol">
+      <i></i><i></i><i></i><i></i><span class="meter-label" data-meter-label></span>
+    </div>
+    <div class="field" data-in="7">
+      <label class="check" style="text-transform:none;letter-spacing:0;font:400 14px/1.45 var(--font-body);color:var(--ink-2)"><input type="checkbox" required data-msg="Please accept to continue" aria-describedby="su-terms-err"> <span>I agree to the <a href="#" data-legal="Terms">Terms</a> and <a href="#" data-legal="Privacy">Privacy Policy</a>.</span></label>
+      <p class="field-error" id="su-terms-err" role="alert"></p>
+    </div>
+    <div data-in="8"><button class="btn" type="submit"><span class="btn-label">Create account <i class="ph ph-arrow-right" aria-hidden="true"></i></span><span class="spinner dots" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
+    <div class="or" data-in="9">or</div>
+    <div class="socials" data-in="10">
+      <button type="button" class="btn-ghost" data-social="Apple"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-ghost" data-social="Google"><i class="ph ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot" data-in="11">Already have an account? <a href="#signin" class="link" data-go="signin">Sign in</a></p>
+</section>
+
+<!-- ======================= FORGOT ======================= -->
+<section class="screen" data-screen="forgot" aria-labelledby="fp-title">
+  <div class="top" data-in="0"><button class="back" data-go="signin" aria-label="Back to sign in"><i class="ph ph-arrow-left"></i></button></div>
+  <div class="fp-art"><div class="anchor" data-anchor aria-hidden="true"></div></div>
+  <div data-when="form">
+    <div class="pad">
+      <h1 class="display" id="fp-title" data-in="1">Lost the <em>thread?</em></h1>
+      <p class="lede" data-in="2">Tell me your email and I’ll send a link to choose a new password.</p>
+    </div>
+    <form class="form shake-target" data-form="forgot">
+      <div class="field" data-in="3">
+        <label for="fp-email">Email</label>
+        <div class="control"><input id="fp-email" type="email" autocomplete="email" required placeholder="you@example.com" data-demo-bad="ana@murmur" aria-describedby="fp-email-err"></div>
+        <p class="field-error" id="fp-email-err" role="alert"></p>
+      </div>
+      <div data-in="4" style="margin-top:8px"><button class="btn" type="submit"><span class="btn-label">Send reset link</span><span class="spinner dots" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
+    </form>
+    <p class="foot" data-in="5">Remembered it? <a href="#signin" class="link" data-go="signin">Back to sign in</a></p>
+  </div>
+  <div data-when="sent" aria-live="polite">
+    <div class="pad">
+      <p class="eyebrow">Sent</p>
+      <h2 class="display" style="margin-top:12px">Check your <em>inbox.</em></h2>
+      <p class="lede">A reset link is on its way to</p>
+      <span class="sent-chip"><i class="ph ph-envelope-simple" aria-hidden="true"></i><span data-sent-email>ana.reyes@mail.com</span></span>
+      <p class="lede" style="font-size:14px">It expires in 15 minutes.</p>
+    </div>
+    <div class="form">
+      <button class="btn" type="button" data-mail-preview><span class="btn-label">Email delivery preview <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span></button>
+      <button type="button" class="resend" data-resend data-seconds="30"><span class="ring" aria-hidden="true"></span><span>Resend in <span data-count>0:30</span></span></button>
+    </div>
+    <p class="foot"><button type="button" class="link" data-reset-state>Use a different email</button></p>
+  </div>
+</section>
+
+<!-- ======================= HOME ======================= -->
+<section class="screen home" data-screen="home" aria-labelledby="home-title">
+  <div class="top" data-in="0"><span class="wordmark" style="font-size:20px"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 5C9-2 0 9 6 17s18 2 14-7S7 3 7 11s10 7 10 0"/></svg>murmur</span><button class="avatar aside" aria-label="Profile, Ana Reyes">A</button></div>
+  <div class="pad" style="padding-top:14px">
+    <p class="eyebrow" data-in="1">Thursday · 9:41 pm</p>
+    <h1 class="display" id="home-title" data-in="2" style="font-size:38px;margin-top:10px">Evening, Ana. <em>What’s on your mind?</em></h1>
+  </div>
+  <div class="home-hero">
+    <div class="anchor" data-anchor aria-hidden="true"></div>
+    <div class="chips" data-in="3">
+      <button class="chip" data-prompt="Plan a slow Sunday for me">Plan a slow Sunday</button>
+      <button class="chip" data-prompt="Explain my lease renewal in plain words">Explain my lease</button>
+      <button class="chip" data-prompt="Help me say no kindly">Say no, kindly</button>
+    </div>
+    <p class="status" data-status>Ready when you are</p>
+  </div>
+  <div class="composer" data-in="4">
+    <label for="ask" class="sr-only">Ask Murmur</label>
+    <input id="ask" type="search" placeholder="Ask anything…" autocomplete="off">
+    <button class="mic" aria-label="Speak"><i class="ph ph-microphone"></i></button>
+    <button class="send" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
+  </div>
+  <div class="sec" data-in="5"><h2>Still thinking about</h2><a href="#" class="link">All threads</a></div>
+  <div class="threads" data-in="6">
+    <article class="thread"><h3><span class="dot" style="background:var(--apricot)"></span>A gentler morning routine</h3><time>2h</time><p>“Start with one glass of water and no phone until…”</p></article>
+    <article class="thread"><h3><span class="dot" style="background:var(--sky)"></span>Pitch for the pottery class</h3><time>Yesterday</time><p>You wanted it to sound warm, not salesy. Draft 3 is…</p></article>
+    <article class="thread"><h3><span class="dot" style="background:var(--blush)"></span>Why sourdough needs patience</h3><time>Mon</time><p>Fermentation is mostly waiting, and that’s the point.</p></article>
+  </div>
+  <nav class="tabbar" role="tablist" aria-label="Main">
+    <button role="tab" aria-selected="true"><i class="ph ph-chat-circle"></i><span>Talk</span></button>
+    <button role="tab" aria-selected="false"><i class="ph ph-books"></i><span>Threads</span></button>
+    <button role="tab" aria-selected="false"><i class="ph ph-sparkle"></i><span>Spaces</span></button>
+    <button role="tab" aria-selected="false"><i class="ph ph-user"></i><span>You</span></button>
+  </nav>
+</section>
+
+<div class="toast" role="status" aria-live="polite"></div><div class="modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" aria-label="Close">×</button><p class="eyebrow">Murmur · Interactive concept</p><h2 id="modal-title"></h2><div class="modal-body"></div></div></div>
+<div class="stage" aria-hidden="true"><canvas id="bubble"></canvas></div>
+</div>
+<script src="../../shared/app.js"></script>
+<script src="../../shared/interactions.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>
