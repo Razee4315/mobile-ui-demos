@@ -1,0 +1,14 @@
+# Pinterest research images: other people's work, kept locally only (moodboards show when present)
+references/
+
+# Raw Codex outputs (large PNGs); the site ships the processed WebP files
+assets/raw/
+series-2/assets/raw/
+
+# Logs, local tooling, OS junk
+tools/logs/
+*.log
+.claude/
+__pycache__/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,274 @@
+{
+ "brutal/bg.webp": [
+  900,
+  1350
+ ],
+ "brutal/depth-1.webp": [
+  220,
+  385
+ ],
+ "brutal/depth-2.webp": [
+  220,
+  190
+ ],
+ "brutal/depth-3.webp": [
+  220,
+  294
+ ],
+ "brutal/hero.webp": [
+  560,
+  479
+ ],
+ "brutal/home-chicken.webp": [
+  320,
+  403
+ ],
+ "brutal/home-donut.webp": [
+  320,
+  291
+ ],
+ "brutal/home-noodles.webp": [
+  320,
+  350
+ ],
+ "brutal/home-pizza.webp": [
+  320,
+  341
+ ],
+ "brutal/icon-burger.webp": [
+  128,
+  134
+ ],
+ "brutal/icon-donut.webp": [
+  128,
+  118
+ ],
+ "brutal/icon-noodles.webp": [
+  128,
+  142
+ ],
+ "brutal/icon-pizza.webp": [
+  128,
+  144
+ ],
+ "brutal/icon-soda.webp": [
+  128,
+  185
+ ],
+ "brutal/icon-taco.webp": [
+  128,
+  101
+ ],
+ "brutal/logo.webp": [
+  160,
+  168
+ ],
+ "chrome/bg.webp": [
+  900,
+  1350
+ ],
+ "chrome/depth-1.webp": [
+  220,
+  222
+ ],
+ "chrome/depth-2.webp": [
+  220,
+  204
+ ],
+ "chrome/depth-3.webp": [
+  220,
+  166
+ ],
+ "chrome/hero.webp": [
+  560,
+  420
+ ],
+ "chrome/home-burrata.webp": [
+  720,
+  480
+ ],
+ "chrome/home-matcha.webp": [
+  720,
+  480
+ ],
+ "chrome/home-pasta.webp": [
+  720,
+  480
+ ],
+ "chrome/home-salmon.webp": [
+  720,
+  480
+ ],
+ "chrome/logo.webp": [
+  160,
+  161
+ ],
+ "clay/bg.webp": [
+  900,
+  1350
+ ],
+ "clay/depth-1.webp": [
+  200,
+  253
+ ],
+ "clay/depth-2.webp": [
+  200,
+  273
+ ],
+ "clay/depth-3.webp": [
+  200,
+  198
+ ],
+ "clay/hero.webp": [
+  560,
+  586
+ ],
+ "clay/home-burger.webp": [
+  320,
+  329
+ ],
+ "clay/home-pancakes.webp": [
+  260,
+  256
+ ],
+ "clay/home-poke.webp": [
+  260,
+  262
+ ],
+ "clay/home-ramen.webp": [
+  400,
+  375
+ ],
+ "clay/icon-burger.webp": [
+  128,
+  119
+ ],
+ "clay/icon-cupcake.webp": [
+  128,
+  160
+ ],
+ "clay/icon-noodles.webp": [
+  128,
+  144
+ ],
+ "clay/icon-pizza.webp": [
+  128,
+  132
+ ],
+ "clay/icon-sushi.webp": [
+  128,
+  126
+ ],
+ "clay/icon-taco.webp": [
+  128,
+  111
+ ],
+ "clay/logo.webp": [
+  160,
+  196
+ ],
+ "glass/bg.webp": [
+  900,
+  1350
+ ],
+ "glass/depth-1.webp": [
+  220,
+  205
+ ],
+ "glass/depth-2.webp": [
+  220,
+  220
+ ],
+ "glass/depth-3.webp": [
+  220,
+  220
+ ],
+ "glass/hero.webp": [
+  560,
+  443
+ ],
+ "glass/home-burger.webp": [
+  720,
+  480
+ ],
+ "glass/home-poke.webp": [
+  720,
+  480
+ ],
+ "glass/home-ramen.webp": [
+  720,
+  480
+ ],
+ "glass/home-sushi.webp": [
+  720,
+  480
+ ],
+ "glass/logo.webp": [
+  160,
+  102
+ ],
+ "plush/bg.webp": [
+  900,
+  1350
+ ],
+ "plush/depth-1.webp": [
+  220,
+  275
+ ],
+ "plush/depth-2.webp": [
+  220,
+  219
+ ],
+ "plush/depth-3.webp": [
+  220,
+  214
+ ],
+ "plush/hero.webp": [
+  560,
+  581
+ ],
+ "plush/home-dumplings.webp": [
+  340,
+  386
+ ],
+ "plush/home-lasagna.webp": [
+  340,
+  318
+ ],
+ "plush/home-pancakes.webp": [
+  340,
+  373
+ ],
+ "plush/home-soup.webp": [
+  340,
+  355
+ ],
+ "plush/icon-bread.webp": [
+  128,
+  97
+ ],
+ "plush/icon-cake.webp": [
+  128,
+  141
+ ],
+ "plush/icon-pasta.webp": [
+  128,
+  100
+ ],
+ "plush/icon-pie.webp": [
+  128,
+  107
+ ],
+ "plush/icon-salad.webp": [
+  128,
+  115
+ ],
+ "plush/icon-soup.webp": [
+  128,
+  146
+ ],
+ "plush/logo.webp": [
+  160,
+  204
+ ]
+}

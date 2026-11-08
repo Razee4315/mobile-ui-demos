@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f1e8">
+<title>Kin · Log in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/kit.css">
+<style>
+  :root { --oat: #f5f1e8; --ink: #1f1d1a; --muted: rgba(31,29,26,.55); --line: rgba(31,29,26,.1); --pick: #ffb38a; }
+  body { background: var(--oat); color: var(--ink); font: 400 15px/1.45 "Hanken Grotesk", system-ui, sans-serif; display: flex; flex-direction: column; padding: var(--top) 22px var(--bottom); position: relative; overflow: hidden; }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+
+  header { position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 21px; letter-spacing: -.8px; }
+  .brand svg { width: 30px; height: 24px; }
+  .brand svg circle { mix-blend-mode: multiply; }
+  .ghost { font-size: 13.5px; text-decoration: none; padding: 8px 13px; border-radius: 99px; border: 1px solid var(--line); background: rgba(255,255,255,.4); }
+
+  /* Colour fields */
+  .fields { position: absolute; left: 0; right: 0; top: 0; height: 100%; z-index: 1; touch-action: none; }
+  .blob { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+  .blob .glow { position: absolute; left: calc(var(--r) * -1px); top: calc(var(--r) * -1px); width: calc(var(--r) * 2px); height: calc(var(--r) * 2px); border-radius: 50%;
+    background: radial-gradient(circle, var(--c) 0%, var(--c) 32%, color-mix(in srgb, var(--c) 40%, transparent) 55%, transparent 70%); filter: blur(14px); mix-blend-mode: multiply;
+    transform: scale(var(--k, 1)); transition: transform .7s var(--spring), filter .6s, opacity .6s; }
+  .blob .lab { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%); white-space: nowrap; font: 500 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: 1px; text-transform: uppercase; color: rgba(31,29,26,.72); display: flex; align-items: center; gap: 6px; transition: opacity .4s, transform .5s var(--spring); }
+  .blob .lab::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); opacity: .6; }
+  .blob .lab small { font-size: 10px; opacity: .55; }
+  .blob.dim .glow { opacity: .35; filter: blur(18px) grayscale(.4); }
+  .blob.on .lab { transform: translate(-50%, -50%) scale(1.08); }
+  .blob.on .lab::before { background: var(--ink); opacity: 1; box-shadow: 0 0 0 3px rgba(255,255,255,.8); }
+  .ring { position: absolute; width: 20px; height: 20px; margin: -10px; border-radius: 50%; border: 1.5px solid rgba(31,29,26,.35); pointer-events: none; animation: ring .9s var(--ease) forwards; }
+  @keyframes ring { to { transform: scale(9); opacity: 0; } }
+  .hint { position: absolute; z-index: 2; left: 50%; transform: translateX(-50%); font: 400 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: .6px; color: var(--muted); text-transform: uppercase; pointer-events: none; white-space: nowrap; transition: opacity .5s; }
+
+  main.panes { margin-top: auto; position: relative; z-index: 3; }
+  .pane { align-self: end; }
+  h1 { font-weight: 500; font-size: 46px; line-height: .98; letter-spacing: -2.3px; margin: 0 0 10px; }
+  h1 em { font-style: normal; color: rgba(31,29,26,.38); }
+  .sub { margin: 0 0 20px; color: var(--muted); font-size: 15px; max-width: 290px; }
+
+  form { display: grid; gap: 10px; }
+  .field { height: 56px; border-radius: 16px; background: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.95); box-shadow: 0 1px 2px rgba(31,29,26,.05); padding: 0 16px; gap: 12px; color: var(--muted); backdrop-filter: blur(12px); transition: box-shadow .3s, background .3s; }
+  .field:focus-within { background: #fff; box-shadow: 0 0 0 4px color-mix(in srgb, var(--pick) 35%, transparent); color: var(--ink); }
+  .field input { font-size: 15.5px; color: var(--ink); }
+  .field input::placeholder { color: rgba(31,29,26,.38); }
+  .field .ico { width: 19px; height: 19px; }
+  .ph { position: absolute; left: 47px; top: 50%; transform: translateY(-50%); pointer-events: none; color: rgba(31,29,26,.4); font-size: 15.5px; white-space: nowrap; }
+  .ph::after { content: ""; display: inline-block; width: 1.5px; height: 1em; margin-left: 1px; vertical-align: -2px; background: rgba(31,29,26,.4); animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .field:focus-within .ph, .field.has .ph { opacity: 0; }
+
+  /* Password collapses when SSO is detected */
+  .collapse { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .55s var(--ease), opacity .4s; }
+  .collapse > * { min-height: 0; overflow: hidden; }
+  .sso-on .collapse.pwd { grid-template-rows: 0fr; opacity: 0; }
+  .collapse.ssochip { grid-template-rows: 0fr; opacity: 0; }
+  .sso-on .collapse.ssochip { grid-template-rows: 1fr; opacity: 1; }
+  .chip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.55); border: 1px dashed rgba(31,29,26,.18); font-size: 13.5px; margin-bottom: 0; }
+  .chip .logo { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-weight: 600; color: var(--ink); background: var(--pick); }
+  .chip small { display: block; color: var(--muted); font-size: 12px; }
+
+  .primary { height: 56px; border-radius: 16px; background: var(--ink); color: #fff; font-weight: 500; font-size: 15.5px; display: grid; place-items: center; box-shadow: 0 14px 30px -16px rgba(31,29,26,.7); }
+  .dots { display: inline-flex; gap: 3px; }
+  .dots i { width: 6px; height: 6px; border-radius: 50%; }
+  .primary.done { background: #2e7d5b; }
+  .alt { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; font-size: 13.5px; color: var(--muted); }
+  .alt a { color: var(--ink); font-weight: 500; text-decoration: none; }
+  .avatars { display: flex; align-items: center; gap: 8px; }
+  .avatars span { display: flex; }
+  .avatars i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--oat); margin-left: -7px; }
+  .avatars i:first-child { margin-left: 0; }
+
+  .preview { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 18px; background: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.9); margin-bottom: 4px; }
+  .preview .sq { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-weight: 600; font-size: 18px; background: var(--pick); transition: background .6s var(--ease); }
+  .preview b { display: block; font-weight: 600; font-size: 15px; }
+  .preview small { color: var(--muted); font-size: 12.5px; }
+  .strength { --meter: var(--ink); color: var(--ink); padding: 0 4px; }
+  .strength i { flex: 1; height: 3px; border-radius: 3px; background: currentColor; opacity: .12; transition: opacity .3s; }
+  .strength { display: flex; gap: 5px; }
+  .strength[data-score="1"] i:nth-child(-n+1), .strength[data-score="2"] i:nth-child(-n+2), .strength[data-score="3"] i:nth-child(-n+3), .strength[data-score="4"] i:nth-child(-n+4) { opacity: .9; }
+</style>
+</head>
+<body>
+  <div class="fields" id="fields" aria-label="Colour fields for your teams. Touch to move them."></div>
+  <div class="hint" id="hint">Touch the colours</div>
+
+  <header class="in" style="--d:0">
+    <div class="brand">
+      <svg viewBox="0 0 38 30" aria-hidden="true"><circle cx="11" cy="17" r="10" fill="#ffb38a"/><circle cx="19" cy="11" r="10" fill="#a9d4ff"/><circle cx="27" cy="17" r="10" fill="#a8e6c9"/></svg>
+      kin
+    </div>
+    <a class="ghost only-login" href="#" data-go="signup">Sign up</a>
+    <a class="ghost only-signup" href="#" data-go="login">Log in</a>
+  </header>
+
+  <main class="panes">
+    <section class="pane login" aria-label="Log in">
+      <h1 class="in" style="--d:2">Work, but<br><em>calmer.</em></h1>
+      <p class="sub in" style="--d:3">Docs, tasks and chat for teams under fifty. No noise, no pings at 2am.</p>
+      <form class="in" style="--d:4" id="loginForm" novalidate>
+        <label class="field" id="emailField"><i data-icon="mail"></i><span class="sr">Work email</span><input type="email" id="email" autocomplete="email"><span class="ph" id="ph"></span></label>
+        <div class="collapse ssochip"><div>
+          <button type="button" class="chip press" data-fake style="width:100%;text-align:left">
+            <span class="logo" id="ssoLogo">A</span>
+            <span style="flex:1"><span id="ssoName">acme.com</span> uses single sign-on<small id="ssoVia">via Google Workspace</small></span>
+            <i data-icon="arrow"></i>
+          </button>
+        </div></div>
+        <div class="collapse pwd"><div>
+          <label class="field"><i data-icon="lock"></i><span class="sr">Password</span><input type="password" placeholder="Password" autocomplete="current-password">
+            <button class="eye" type="button" data-eye aria-label="Show password"><i data-icon="eye"></i><i data-icon="eye-off"></i></button></label>
+        </div></div>
+        <button class="primary press" type="submit"><span class="btn-label"><span id="cta">Continue</span><span class="dots" aria-hidden="true"><i style="background:#ffb38a"></i><i style="background:#ffe38a"></i><i style="background:#a9d4ff"></i><i style="background:#a8e6c9"></i></span></span></button>
+      </form>
+      <div class="alt in" style="--d:5">
+        <span class="avatars"><span><i style="background:#ffb38a"></i><i style="background:#cfc2ff"></i><i style="background:#a8e6c9"></i></span>4,200 calm teams</span>
+        <a href="#" data-go="signup">Start a space →</a>
+      </div>
+    </section>
+
+    <section class="pane signup" aria-label="Create a workspace">
+      <h1>Start a<br><em>space.</em></h1>
+      <p class="sub">Tap a colour above to make it yours.</p>
+      <form novalidate>
+        <div class="preview"><span class="sq" id="sq">A</span><span><b id="wsName">Acme Studio</b><small class="mono" id="wsUrl">kin.so/acme-studio</small></span></div>
+        <label class="field"><i data-icon="user"></i><span class="sr">Workspace name</span><input type="text" placeholder="Workspace name" id="ws"></label>
+        <label class="field"><i data-icon="mail"></i><span class="sr">Work email</span><input type="email" placeholder="Work email" autocomplete="email"></label>
+        <label class="field"><i data-icon="lock"></i><span class="sr">Password</span><input type="password" placeholder="Password" autocomplete="new-password" data-strength>
+          <button class="eye" type="button" data-eye aria-label="Show password"><i data-icon="eye"></i><i data-icon="eye-off"></i></button></label>
+        <div class="strength" data-score="0"><i></i><i></i><i></i><i></i></div>
+        <button class="primary press" type="submit"><span class="btn-label">Create workspace</span></button>
+      </form>
+    </section>
+  </main>
+
+  <script src="../../../shared/icons.js"></script>
+  <script src="../../shared/kit.js"></script>
+  <script>
+  (() => {
+    const { loop, pointer, haptic } = Kit;
+    const root = document.documentElement;
+    const host = document.getElementById('fields'), hint = document.getElementById('hint');
+    const DEF = [
+      { c: '#ffb38a', label: 'Design', n: 12, hx: .24, hy: .30, r: 96 },
+      { c: '#ffe38a', label: 'Growth', n: 7, hx: .74, hy: .24, r: 82 },
+      { c: '#a9d4ff', label: 'Engineering', n: 31, hx: .60, hy: .62, r: 110 },
+      { c: '#a8e6c9', label: 'Ops', n: 5, hx: .20, hy: .74, r: 78 },
+      { c: '#cfc2ff', label: 'Research', n: 9, hx: .86, hy: .80, r: 70 },
+    ];
+    const blobs = DEF.map((d, i) => {
+      const el = document.createElement('div');
+      el.className = 'blob'; el.style.setProperty('--c', d.c); el.style.setProperty('--r', d.r);
+      el.innerHTML = `<div class="glow"></div><div class="lab">${d.label} <small>${d.n}</small></div>`;
+      host.append(el);
+      return { ...d, el, x: innerWidth * d.hx, y: 200, vx: 0, vy: 0, ph: i * 1.7 };
+    });
+
+    // the field area lives between the header and the active pane's first line
+    let area = { top: 100, h: 300 };
+    const head = document.querySelector('header');
+    const measure = () => {
+      const pane = document.querySelector('.pane.' + root.dataset.view);
+      const top = head.getBoundingClientRect().bottom + 6;
+      const bottom = document.querySelector('.panes').getBoundingClientRect().top + pane.offsetTop - 14;
+      area = { top, h: Math.max(120, bottom - top) };
+      hint.style.top = (bottom - 6) + 'px';
+    };
+    addEventListener('resize', measure);
+    document.fonts && document.fonts.ready.then(measure);
+    measure();
+    blobs.forEach(b => { b.x = innerWidth * b.hx; b.y = area.top + area.h * b.hy; });
+
+    let swirl = 0, picked = -1;
+    loop((dt, t) => {
+      measure();
+      const w = innerWidth;
+      const live = performance.now() - pointer.lastMove < 1200;
+      blobs.forEach((b, i) => {
+        let tx = w * b.hx + Math.sin(t * .35 + b.ph) * w * .09;
+        let ty = area.top + area.h * b.hy + Math.cos(t * .29 + b.ph * 1.3) * area.h * .1;
+        if (swirl > 0) { const a = t * 2.4 + i * 1.2566; tx = w / 2 + Math.cos(a) * 70; ty = area.top + area.h * .5 + Math.sin(a) * 50; }
+        b.vx += (tx - b.x) * 3.2 * dt; b.vy += (ty - b.y) * 3.2 * dt;
+        if (live) {
+          const dx = b.x - pointer.x, dy = b.y - pointer.y, d = Math.hypot(dx, dy) || 1, R = pointer.down ? 210 : 150;
+          if (d < R) { const f = (1 - d / R) * (pointer.down ? 1700 : 900) * dt; b.vx += dx / d * f; b.vy += dy / d * f; }
+        }
+        const damp = Math.pow(.9, dt * 60); b.vx *= damp; b.vy *= damp;
+        b.x += b.vx * dt; b.y += b.vy * dt;
+        b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
+      });
+      if (swirl > 0) swirl -= dt;
+    });
+
+    // touch ripples + hide hint after first touch
+    host.addEventListener('pointerdown', e => {
+      const r = document.createElement('span'); r.className = 'ring';
+      r.style.left = e.clientX + 'px'; r.style.top = e.clientY + 'px';
+      host.append(r); setTimeout(() => r.remove(), 900);
+      hint.style.opacity = 0; haptic(5);
+      // in sign up, tapping near a blob picks it
+      if (root.dataset.view !== 'signup') return;
+      let best = -1, bd = 1e9;
+      blobs.forEach((b, i) => { const d = Math.hypot(b.x - e.clientX, b.y - e.clientY); if (d < bd && d < b.r) { bd = d; best = i; } });
+      if (best >= 0) pick(best);
+    });
+    const pick = i => {
+      picked = i;
+      blobs.forEach((b, j) => { b.el.classList.toggle('on', j === i); b.el.classList.toggle('dim', j !== i); b.el.style.setProperty('--k', j === i ? 1.35 : .8); });
+      root.style.setProperty('--pick', blobs[i].c);
+      haptic(10);
+    };
+    const unpick = () => blobs.forEach(b => { b.el.classList.remove('on', 'dim'); b.el.style.setProperty('--k', 1); });
+
+    document.addEventListener('kit:view', e => {
+      setTimeout(measure, 20); setTimeout(measure, 400);
+      hint.textContent = e.detail.view === 'signup' ? 'Tap a colour to pick it' : 'Touch the colours';
+      hint.style.opacity = 1;
+      if (e.detail.view === 'signup') pick(picked >= 0 ? picked : 0); else unpick();
+    });
+    if (root.dataset.view === 'signup') { pick(0); hint.textContent = 'Tap a colour to pick it'; }
+    document.addEventListener('kit:submit', () => { swirl = 1.3; });
+    document.addEventListener('kit:success', () => { blobs.forEach(b => { b.vx += (Math.random() - .5) * 900; b.vy += (Math.random() - .5) * 900; }); });
+
+    /* ---------- Animated placeholder that types example emails ---------- */
+    const ph = document.getElementById('ph'), email = document.getElementById('email'), emailField = document.getElementById('emailField');
+    const samples = ['maya@lumen.studio', 'theo@northwind.co', 'ana@fieldwork.io'];
+    let si = 0;
+    const typeSample = async () => {
+      while (true) {
+        const s = samples[si++ % samples.length];
+        for (let i = 0; i <= s.length; i++) { ph.textContent = s.slice(0, i); await new Promise(r => setTimeout(r, 55 + Math.random() * 50)); }
+        await new Promise(r => setTimeout(r, 1600));
+        for (let i = s.length; i >= 0; i--) { ph.textContent = s.slice(0, i); await new Promise(r => setTimeout(r, 22)); }
+        await new Promise(r => setTimeout(r, 300));
+      }
+    };
+    typeSample();
+
+    /* ---------- Email-first: detect SSO from the domain ---------- */
+    const personal = ['gmail.com', 'yahoo.com', 'outlook.com', 'icloud.com', 'hotmail.com', 'proton.me'];
+    const form = document.getElementById('loginForm'), cta = document.getElementById('cta');
+    email.addEventListener('input', () => {
+      emailField.classList.toggle('has', !!email.value);
+      const m = email.value.toLowerCase().match(/@([a-z0-9-]+\.[a-z.]{2,})$/);
+      const sso = m && !personal.includes(m[1]);
+      form.classList.toggle('sso-on', !!sso);
+      cta.textContent = sso ? 'Continue with SSO' : 'Continue';
+      if (sso) {
+        document.getElementById('ssoName').textContent = m[1];
+        document.getElementById('ssoLogo').textContent = m[1][0].toUpperCase();
+        document.getElementById('ssoVia').textContent = 'via ' + (m[1].length % 2 ? 'Okta' : 'Google Workspace');
+      }
+    });
+
+    /* ---------- Workspace preview ---------- */
+    const ws = document.getElementById('ws');
+    ws.addEventListener('input', () => {
+      const v = ws.value.trim() || 'Acme Studio';
+      document.getElementById('wsName').textContent = v;
+      document.getElementById('sq').textContent = v[0].toUpperCase();
+      document.getElementById('wsUrl').textContent = 'kin.so/' + v.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    });
+  })();
+  </script>
+</body>
+</html>

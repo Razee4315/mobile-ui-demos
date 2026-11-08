@@ -1,0 +1,55 @@
+/* Base for every app screen. Concept CSS layers on top. */
+*, *::before, *::after { box-sizing: border-box; }
+:root { --top: max(env(safe-area-inset-top, 0px), 20px); --bottom: max(env(safe-area-inset-bottom, 0px), 16px); --ease: cubic-bezier(.22, 1, .36, 1); }
+.os-ios { --top: 54px; --bottom: 30px; }
+.os-android { --top: 44px; --bottom: 22px; }
+html, body { margin: 0; height: 100%; }
+body { min-height: 100dvh; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+.in-mockup body { overflow: hidden; }
+.in-mockup ::-webkit-scrollbar { display: none; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+a { color: inherit; }
+.ico { width: 20px; height: 20px; flex: none; display: block; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Two panes stacked in one grid cell so height never jumps; cross-fade between them. */
+.panes { display: grid; grid-template-columns: minmax(0, 1fr); }
+.pane { grid-area: 1 / 1; min-width: 0; transition: opacity .55s var(--ease), transform .65s var(--ease), visibility 0s linear 0s; }
+[data-view="login"] .pane.signup,
+[data-view="signup"] .pane.login { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .35s var(--ease), transform .5s var(--ease), visibility 0s linear .5s; }
+[data-view="login"] .pane.signup { transform: translateX(28px); }
+[data-view="signup"] .pane.login { transform: translateX(-28px); }
+[data-view="login"] .only-signup, [data-view="signup"] .only-login { display: none; }
+
+/* Entrance: elements with .rise fade up on load, staggered with --d */
+.rise { opacity: 0; transform: translateY(16px); }
+.ready .rise { opacity: 1; transform: none; transition: opacity .9s var(--ease) calc(var(--d, 0) * 70ms), transform 1s var(--ease) calc(var(--d, 0) * 70ms); }
+
+/* Fields */
+.field { position: relative; display: flex; align-items: center; }
+.field input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; }
+.field .eye .ico + .ico, .field .eye.on .ico:first-child { display: none; }
+.field .eye.on .ico + .ico { display: block; }
+
+/* Password strength: 4 bars */
+.strength { display: flex; align-items: center; gap: 5px; }
+.strength i { flex: 1; height: 4px; border-radius: 4px; background: currentColor; opacity: .15; transition: opacity .3s, background .3s; }
+.strength-label { flex: 0 0 64px; text-align: right; font-size: 11px; opacity: .7; }
+.strength[data-score="1"] i:nth-child(-n+1),
+.strength[data-score="2"] i:nth-child(-n+2),
+.strength[data-score="3"] i:nth-child(-n+3),
+.strength[data-score="4"] i:nth-child(-n+4) { opacity: 1; background: var(--meter, currentColor); }
+
+/* Submit button states */
+.btn-label { display: inline-flex; align-items: center; gap: 8px; transition: opacity .2s, transform .3s var(--ease); }
+[type=submit] { position: relative; }
+[type=submit]::after { content: ""; position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; margin: -10px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; opacity: 0; transition: opacity .2s; }
+[type=submit].loading .btn-label { opacity: 0; transform: scale(.9); }
+[type=submit].loading::after { opacity: 1; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+}

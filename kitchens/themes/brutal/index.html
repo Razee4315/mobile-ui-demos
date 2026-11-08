@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grubby — Neo Brutal</title>
+<meta name="theme-color" content="#FFF8EC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ======================= SIGN IN ======================= -->
+<section class="screen" data-screen="signin" aria-labelledby="si-title">
+  <div class="head">
+    <img src="../../assets/brutal/logo.webp" alt="" width="160" height="168">
+    <b>GRUBBY</b>
+    <span class="tag">Open till 3 AM</span>
+  </div>
+  <div class="si-top">
+    <img class="sticker sauce float b" data-depth="12" src="../../assets/brutal/depth-1.webp" alt="" style="--rot:14deg" width="220" height="385">
+    <h1 class="display" id="si-title">Hungry?<br><span class="hl">Let’s</span><br>go.</h1>
+    <img class="sticker hero float" data-depth="6" src="../../assets/brutal/hero.webp" alt="Grubby mascot, a running cheeseburger holding fries" style="--rot:-4deg" width="560" height="479">
+  </div>
+  <form class="box card shake-target" data-form="signin" data-next="home">
+    <div class="field">
+      <label for="si-id">Email or phone</label>
+      <div class="control"><i class="ph-bold ph-at" aria-hidden="true"></i>
+        <input id="si-id" type="text" inputmode="email" autocomplete="username" required data-kind="email-or-phone" data-demo-bad="sam@grubby" value="sam.rivera@mail.com" placeholder="you@email.com" aria-describedby="si-id-err"></div>
+      <p class="field-error" id="si-id-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <div class="row-between"><label for="si-pw">Password</label><a href="#forgot" class="link" data-go="forgot" style="font-size:14px">Forgot it?</a></div>
+      <div class="control"><i class="ph-bold ph-lock-simple" aria-hidden="true"></i>
+        <input id="si-pw" type="password" autocomplete="current-password" required data-minlength="6" value="extrapickles" placeholder="Your password" aria-describedby="si-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-bold ph-eye"></i><i class="ph-bold ph-eye-slash"></i></button></div>
+      <p class="field-error" id="si-pw-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit" style="margin-top:20px"><span class="btn-label">Let me eat <i class="ph-bold ph-arrow-right" aria-hidden="true"></i></span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or">or</div>
+    <div class="socials">
+      <button type="button" class="btn-s dark" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-s light" data-go="home"><i class="ph-bold ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">No account yet? <a href="#signup" class="link" data-go="signup">Make one</a></p>
+</section>
+
+<!-- ======================= SIGN UP ======================= -->
+<section class="screen" data-screen="signup" aria-labelledby="su-title">
+  <div class="head">
+    <button class="back" data-go="signin" aria-label="Back to sign in"><i class="ph-bold ph-arrow-left"></i></button>
+    <span class="tag" style="background:var(--yellow)">First 3 orders: $0 delivery</span>
+  </div>
+  <div class="block cobalt">
+    <img class="sticker float" data-depth="10" src="../../assets/brutal/depth-2.webp" alt="" style="right:-10px; top:-26px; width:124px; --rot:-12deg" width="220" height="190">
+    <h1 class="display" id="su-title">Join the<br><span class="hl" style="color:var(--ink)">grub</span> club</h1>
+    <p class="lede">Loud food, fast. Sign up in 20 seconds flat.</p>
+  </div>
+  <form class="box card shake-target" data-form="signup" data-next="home">
+    <div class="field">
+      <label for="su-name">Name</label>
+      <div class="control"><i class="ph-bold ph-smiley" aria-hidden="true"></i>
+        <input id="su-name" type="text" autocomplete="name" required placeholder="Sam Rivera" data-msg-empty="Need a name, chief" aria-describedby="su-name-err"></div>
+      <p class="field-error" id="su-name-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <label for="su-email">Email</label>
+      <div class="control"><i class="ph-bold ph-at" aria-hidden="true"></i>
+        <input id="su-email" type="email" autocomplete="email" required placeholder="you@email.com" data-demo-bad="sam@grubby" data-msg="That email looks off" aria-describedby="su-email-err"></div>
+      <p class="field-error" id="su-email-err" role="alert"></p>
+    </div>
+    <div class="field" style="margin-bottom:10px">
+      <label for="su-pw">Password</label>
+      <div class="control"><i class="ph-bold ph-lock-simple" aria-hidden="true"></i>
+        <input id="su-pw" type="password" autocomplete="new-password" required data-minlength="8" data-strength="su-meter" placeholder="8+ characters" aria-describedby="su-meter su-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-bold ph-eye"></i><i class="ph-bold ph-eye-slash"></i></button></div>
+      <p class="field-error" id="su-pw-err" role="alert"></p>
+    </div>
+    <div class="meter" id="su-meter" data-level="0" aria-live="polite" data-labels="Nope|Meh|Okay|Solid|Beast" data-empty="—">
+      <i></i><i></i><i></i><i></i><span class="meter-label" data-meter-label></span>
+    </div>
+    <div class="field">
+      <label class="check"><input type="checkbox" required data-msg="Tick the box to continue" aria-describedby="su-terms-err"> <span>I agree to the <a class="link" href="#" onclick="return false">Terms</a> and <a class="link" href="#" onclick="return false">Privacy</a>. No spam, only snacks.</span></label>
+      <p class="field-error" id="su-terms-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit" style="background:var(--pink)"><span class="btn-label">Sign me up <i class="ph-bold ph-lightning" aria-hidden="true"></i></span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or">or</div>
+    <div class="socials">
+      <button type="button" class="btn-s dark" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-s light" data-go="home"><i class="ph-bold ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">Got an account? <a href="#signin" class="link" data-go="signin">Sign in</a></p>
+</section>
+
+<!-- ======================= FORGOT ======================= -->
+<section class="screen" data-screen="forgot" aria-labelledby="fp-title">
+  <div class="head">
+    <button class="back" data-go="signin" aria-label="Back to sign in"><i class="ph-bold ph-arrow-left"></i></button>
+  </div>
+  <div data-when="form">
+    <div class="block pink">
+      <img class="sticker float" data-depth="10" src="../../assets/brutal/depth-3.webp" alt="" style="right:6px; top:-30px; width:82px; --rot:16deg" width="220" height="294">
+      <h1 class="display" id="fp-title">Brain<br><span class="hl white">freeze?</span></h1>
+      <p class="lede">Forgot your password. Happens. Drop your email and we’ll fire over a reset link.</p>
+    </div>
+    <form class="box card shake-target" data-form="forgot">
+      <div class="field">
+        <label for="fp-email">Email</label>
+        <div class="control"><i class="ph-bold ph-at" aria-hidden="true"></i>
+          <input id="fp-email" type="email" autocomplete="email" required value="sam.rivera@mail.com" placeholder="you@email.com" data-demo-bad="sam.rivera@mail" data-msg="That email looks off" aria-describedby="fp-email-err"></div>
+        <p class="field-error" id="fp-email-err" role="alert"></p>
+      </div>
+      <button class="btn" type="submit" style="margin-top:8px"><span class="btn-label">Send reset link <i class="ph-bold ph-paper-plane-right" aria-hidden="true"></i></span><span class="spinner" aria-hidden="true"></span></button>
+    </form>
+    <p class="foot">Remembered? <a href="#signin" class="link" data-go="signin">Back to sign in</a></p>
+  </div>
+
+  <div data-when="sent" aria-live="polite">
+    <div class="sent-art"><div class="env"><span class="burst">Sent!</span></div></div>
+    <div style="padding:0 var(--sp-6)">
+      <h2 class="display" style="font-size:44px">Check<br>your <span class="hl">inbox</span></h2>
+      <p class="lede">Reset link sent to <b data-sent-email style="background:var(--yellow); padding:0 4px">sam.rivera@mail.com</b>. Good for 15 minutes.</p>
+    </div>
+    <div class="box card" style="margin-top:22px">
+      <a class="btn" href="#" onclick="return false"><span class="btn-label">Open my email <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></span></a>
+      <button type="button" class="resend" data-resend data-seconds="30"><span>Resend</span><span data-count>0:30</span></button>
+    </div>
+    <p class="foot"><button type="button" class="link" data-reset-state>Wrong email? Change it</button></p>
+  </div>
+</section>
+
+<!-- ======================= HOME ======================= -->
+<section class="screen home" data-screen="home" aria-labelledby="home-title">
+  <div class="home-top">
+    <span class="addr"><i class="ph-fill ph-map-pin" style="color:var(--yellow)" aria-hidden="true"></i>221 Canal St <i class="ph-bold ph-caret-down" aria-hidden="true"></i></span>
+    <button class="avatar" aria-label="Profile, Sam Rivera">SR</button>
+  </div>
+  <div class="home-greet">
+    <h1 class="display" id="home-title">Yo Sam,<br>what’s <span class="hl pink">the</span> move?</h1>
+  </div>
+
+  <article class="promo">
+    <span class="tag" style="background:var(--white)">Tonight only</span>
+    <h2>2 slices for $6</h2>
+    <button class="btn-s">Grab it <i class="ph-bold ph-arrow-right" aria-hidden="true"></i></button>
+    <span class="burst">New!</span>
+    <img class="sticker pizza" src="../../assets/brutal/home-pizza.webp" alt="Pizza slice sticker with stretchy cheese" width="320" height="341">
+  </article>
+
+  <div class="sec-head"><h2>Pick your poison</h2></div>
+  <div class="chips" role="group" aria-label="Categories">
+    <button class="chip" aria-pressed="true"><img src="../../assets/brutal/icon-burger.webp" alt="" width="128" height="134">Burgers</button>
+    <button class="chip" aria-pressed="false"><img src="../../assets/brutal/icon-pizza.webp" alt="" width="128" height="144">Pizza</button>
+    <button class="chip" aria-pressed="false"><img src="../../assets/brutal/icon-taco.webp" alt="" width="128" height="101">Tacos</button>
+    <button class="chip" aria-pressed="false"><img src="../../assets/brutal/icon-noodles.webp" alt="" width="128" height="142">Noodles</button>
+    <button class="chip" aria-pressed="false"><img src="../../assets/brutal/icon-donut.webp" alt="" width="128" height="118">Sweets</button>
+    <button class="chip" aria-pressed="false"><img src="../../assets/brutal/icon-soda.webp" alt="" width="128" height="185">Drinks</button>
+  </div>
+
+  <div class="sec-head"><h2>Hot right now</h2><a href="#" class="link" style="font-size:14px">All 48</a></div>
+  <div class="grid">
+    <div style="display:grid; gap:14px">
+      <article class="food tall c-pink"><span class="price">$9</span><div class="pic"><img src="../../assets/brutal/home-chicken.webp" alt="Fried chicken bucket sticker" width="320" height="403"></div><div class="strip"><h3>Cluck Norris</h3><p>Fried chicken · 12 min</p></div></article>
+      <article class="food c-mint"><span class="price">$4</span><div class="pic"><img src="../../assets/brutal/home-donut.webp" alt="Pink donut sticker" width="320" height="291"></div><div class="strip"><h3>Hole Lotta Love</h3><p>Donuts · 8 min</p></div></article>
+    </div>
+    <div style="display:grid; gap:14px">
+      <article class="food c-cobalt"><span class="price">$11</span><div class="pic"><img src="../../assets/brutal/home-noodles.webp" alt="Takeout noodle box sticker" width="320" height="350"></div><div class="strip"><h3>Wok This Way</h3><p>Noodles · 15 min</p></div></article>
+      <article class="food tall c-tomato"><span class="price">$6</span><div class="pic"><img src="../../assets/brutal/home-pizza.webp" alt="Pizza slice sticker" width="320" height="341"></div><div class="strip"><h3>Slice Slice Baby</h3><p>Pizza · 10 min</p></div></article>
+    </div>
+  </div>
+
+  <nav class="tabbar" role="tablist" aria-label="Main">
+    <button role="tab" aria-selected="true"><i class="ph-bold ph-house"></i><i class="ph-fill ph-house"></i>Home</button>
+    <button role="tab" aria-selected="false"><i class="ph-bold ph-magnifying-glass"></i><i class="ph-fill ph-magnifying-glass"></i>Search</button>
+    <button role="tab" aria-selected="false"><i class="ph-bold ph-receipt"></i><i class="ph-fill ph-receipt"></i>Orders</button>
+    <button role="tab" aria-selected="false"><i class="ph-bold ph-fire"></i><i class="ph-fill ph-fire"></i>Deals</button>
+    <button role="tab" aria-selected="false"><i class="ph-bold ph-user"></i><i class="ph-fill ph-user"></i>Me</button>
+  </nav>
+</section>
+
+</div>
+<script src="../../shared/app.js"></script>
+<script>
+  document.querySelectorAll('.chip').forEach((c) => c.addEventListener('click', () => document.querySelectorAll('.chip').forEach((x) => x.setAttribute('aria-pressed', String(x === c)))));
+</script>
+</body>
+</html>

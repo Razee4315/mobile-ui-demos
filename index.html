@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile UI Demos</title>
+<meta name="description" content="Mobile sign-in and sign-up concepts built in HTML, CSS and JavaScript: 15 invented brands across 3 collections, live inside iPhone and Android frames.">
+<meta property="og:title" content="Mobile UI Demos">
+<meta property="og:description" content="15 invented brands, 3 collections of mobile sign-in concepts, live in iPhone and Android frames.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f7f4ef">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/devices.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root { --paper: #f7f4ef; --ink: #1d1c1a; --muted: rgba(29,28,26,.6); --line: rgba(29,28,26,.1); --gutter: clamp(16px, 4vw, 56px); }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); }
+  body { font: 400 16px/1.55 "Inter Tight", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+
+  .bar { display: flex; justify-content: space-between; align-items: center; padding: 18px var(--gutter); max-width: 1440px; margin: 0 auto; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -.3px; text-decoration: none; }
+  .logo img { width: 26px; height: 26px; }
+  .bar nav { display: flex; gap: 20px; font-size: 14px; }
+  .bar nav a { text-decoration: none; opacity: .65; transition: opacity .2s; }
+  .bar nav a:hover { opacity: 1; }
+
+  .hero { position: relative; padding: clamp(40px, 8vw, 110px) var(--gutter) clamp(36px, 6vw, 80px); max-width: 1440px; margin: 0 auto; }
+  .wash { position: absolute; inset: 0 0 auto auto; width: min(52vw, 640px); aspect-ratio: 1; pointer-events: none; z-index: -1; }
+  .wash i { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .6; animation: drift 14s ease-in-out infinite alternate; }
+  .wash i:nth-child(1) { width: 55%; height: 55%; left: 8%; top: 12%; background: #ffcaa8; }
+  .wash i:nth-child(2) { width: 50%; height: 50%; right: 4%; top: 0; background: #d6d0ff; animation-delay: -5s; }
+  .wash i:nth-child(3) { width: 46%; height: 46%; left: 30%; bottom: 4%; background: #bfe9dc; animation-delay: -9s; }
+  @keyframes drift { to { transform: translate(24px, 30px) scale(1.12); } }
+  .eyebrow { font: 500 12px/1 "JetBrains Mono", monospace; letter-spacing: .6px; text-transform: uppercase; opacity: .55; margin: 0 0 22px; }
+  h1 { font-size: clamp(54px, 10vw, 156px); line-height: .86; letter-spacing: -.055em; font-weight: 700; margin: 0 0 28px; }
+  h1 em { font: italic 400 1.04em/1 "Instrument Serif", serif; letter-spacing: -.02em; }
+  .lede { font-size: clamp(17px, 1.7vw, 22px); max-width: 720px; margin: 0 0 32px; color: rgba(29,28,26,.78); }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; }
+  .stats span { font: 500 12.5px/1 "JetBrains Mono", monospace; padding: 9px 13px; border: 1px solid var(--line); border-radius: 99px; background: rgba(255,255,255,.5); }
+
+  .collections { max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter) 40px; display: grid; gap: clamp(18px, 2.4vw, 28px); }
+  .col { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); border-radius: 32px; overflow: hidden; text-decoration: none; background: var(--bg); color: var(--fg); border: 1px solid rgba(0,0,0,.06); transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s; }
+  .col:hover { transform: translateY(-4px); box-shadow: 0 40px 70px -40px rgba(30,25,20,.45); }
+  .col .copy { padding: clamp(26px, 4vw, 56px); display: flex; flex-direction: column; }
+  .col .tag { font: 500 12px/1 "JetBrains Mono", monospace; letter-spacing: .6px; text-transform: uppercase; opacity: .6; }
+  .col h2 { font-size: clamp(40px, 5.4vw, 80px); line-height: .92; letter-spacing: -.045em; margin: 16px 0 16px; font-weight: 700; }
+  .col p { margin: 0 0 22px; font-size: 16.5px; opacity: .8; max-width: 460px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+  .chips span { font-size: 13px; padding: 6px 11px; border-radius: 99px; background: color-mix(in srgb, var(--fg) 8%, transparent); }
+  .go { margin-top: auto; display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; padding: 13px 20px; border-radius: 99px; background: var(--fg); color: var(--bg); font-weight: 600; font-size: 15px; }
+  .go span { transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+  .col:hover .go span { transform: translateX(5px); }
+  .phones { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: clamp(10px, 1.6vw, 22px); padding: clamp(24px, 3vw, 44px) clamp(16px, 3vw, 40px) 0; min-height: 100%; }
+  .phones .device { width: clamp(120px, 12.5vw, 196px); flex: none; pointer-events: none; margin-bottom: -18%; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .phones .device:nth-child(2) { margin-bottom: -6%; }
+  .col:hover .phones .device:nth-child(1) { transform: translateY(-8px) rotate(-2deg); }
+  .col:hover .phones .device:nth-child(3) { transform: translateY(-8px) rotate(2deg); }
+  @media (max-width: 960px) {
+    .col { grid-template-columns: 1fr; }
+    .phones { min-height: 0; }
+  }
+  @media (max-width: 560px) {
+    .phones .device { width: 31%; }
+    .phones .device:nth-child(n) { margin-bottom: -22%; }
+  }
+
+  .how { max-width: 1440px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) var(--gutter); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; border-top: 1px solid var(--line); }
+  .how h3 { font-size: 15px; margin: 10px 0 6px; }
+  .how p { margin: 0; font-size: 14.5px; color: var(--muted); }
+  .how .n { font: 500 12px/1 "JetBrains Mono", monospace; opacity: .5; }
+  @media (max-width: 860px) { .how { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .how { grid-template-columns: 1fr; } }
+  footer { max-width: 1440px; margin: 0 auto; padding: 24px var(--gutter) 56px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13.5px; color: var(--muted); }
+  footer a { text-decoration: none; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <a class="logo" href="./"><img src="favicon.svg" alt="" width="26" height="26">Mobile UI Demos</a>
+    <nav><a href="series-2/index.html">Alive</a><a href="kitchens/index.html">Kitchens</a><a href="series-1.html">Studies</a><a href="https://github.com/Razee4315/mobile-ui-demos">GitHub</a></nav>
+  </div>
+
+  <header class="hero">
+    <div class="wash" aria-hidden="true"><i></i><i></i><i></i></div>
+    <p class="eyebrow">Login &amp; sign-up concepts · HTML, CSS, JS</p>
+    <h1>Fifteen ways<br>to <em>sign in.</em></h1>
+    <p class="lede">Fifteen invented brands in three collections, each with its own logo, palette, type and motion. Every screen is real code running inside iPhone and Android frames. Open a collection and type, tap and poke the phones.</p>
+    <div class="stats"><span>15 brands</span><span>3 collections</span><span>iPhone 15 Pro + Pixel 8</span><span>no frameworks</span></div>
+  </header>
+
+  <main class="collections">
+    <a class="col" href="series-2/index.html" style="--bg:#f3ece6;--fg:#1d1c1a">
+      <div class="copy">
+        <span class="tag">Collection 03 · newest</span>
+        <h2>Sign in,<br>but alive.</h2>
+        <p>Light, minimal and motion-first. An AI orb with eyes, a support mascot that covers its eyes for your password, colour fields that scatter, a live easing editor, an image studio that paints.</p>
+        <div class="chips"><span>Wisp · AI chat</span><span>Peep · support</span><span>Kin · SaaS</span><span>Ease · motion</span><span>Muse · AI images</span></div>
+        <span class="go">Open collection <span>→</span></span>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <div class="device" data-os="ios" data-bar="dark" data-src="series-2/concepts/peep/screen.html?view=login"></div>
+        <div class="device" data-os="ios" data-bar="dark" data-src="series-2/concepts/wisp/screen.html?view=login"></div>
+        <div class="device" data-os="ios" data-bar="dark" data-src="series-2/concepts/muse/screen.html?view=login"></div>
+      </div>
+    </a>
+
+    <a class="col" href="kitchens/index.html" style="--bg:#fbeee2;--fg:#3a2419">
+      <div class="copy">
+        <span class="tag">Collection 02 · food delivery</span>
+        <h2>Five<br>Kitchens.</h2>
+        <p>One product, five design languages: soft clay, futuristic glass, plush textile, neo-brutal and liquid chrome. Each has sign in, sign up, forgot password and a home feed, with error, loading and sent states.</p>
+        <div class="chips"><span>Dumpli</span><span>Orbyt</span><span>Hearthly</span><span>Grubby</span><span>Lume</span></div>
+        <span class="go">Open collection <span>→</span></span>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <div class="device" data-os="ios" data-bar="dark" data-src="kitchens/themes/brutal/index.html?device=ios#signin"></div>
+        <div class="device" data-os="ios" data-bar="dark" data-src="kitchens/themes/clay/index.html?device=ios#signin"></div>
+        <div class="device" data-os="ios" data-bar="light" data-src="kitchens/themes/glass/index.html?device=ios#signin"></div>
+      </div>
+    </a>
+
+    <a class="col" href="series-1.html" style="--bg:#16151c;--fg:#f2f0ea">
+      <div class="copy">
+        <span class="tag">Collection 01 · first study</span>
+        <h2>Sign-in<br>Studies.</h2>
+        <p>The first round: five bold art directions, from a midnight aurora journal to a poster-type money app, with generated 3D art and photography.</p>
+        <div class="chips"><span>Lumen</span><span>Tern</span><span>Moko</span><span>Kiln</span><span>Halo</span></div>
+        <span class="go">Open collection <span>→</span></span>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <div class="device" data-os="ios" data-bar="light" data-src="concepts/tern/screen.html?view=login"></div>
+        <div class="device" data-os="ios" data-bar="light" data-src="concepts/lumen/screen.html?view=login"></div>
+        <div class="device" data-os="ios" data-bar="dark" data-src="concepts/moko/screen.html?view=login"></div>
+      </div>
+    </a>
+  </main>
+
+  <section class="how" aria-label="How these were made">
+    <div><span class="n">01</span><h3>Research</h3><p>Hundreds of Pinterest pins, sorted into patterns worth stealing: motion, palette, layout.</p></div>
+    <div><span class="n">02</span><h3>Art direction</h3><p>Each brand gets a name, a logo drawn in SVG, a palette, a type pairing and its own rules.</p></div>
+    <div><span class="n">03</span><h3>Generated art</h3><p>Photos and 3D objects generated with Codex, then checked, trimmed and shipped as WebP.</p></div>
+    <div><span class="n">04</span><h3>Hand-built screens</h3><p>Plain HTML, CSS and JavaScript. Springs, shaders and physics, no frameworks.</p></div>
+  </section>
+
+  <footer><span>Concepts only. Every brand here is made up.</span><a href="https://github.com/Razee4315/mobile-ui-demos">Source on GitHub →</a></footer>
+
+  <script src="shared/devices.js"></script>
+</body>
+</html>

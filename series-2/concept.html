@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/devices.css">
+<link rel="stylesheet" href="../shared/showcase.css">
+<style>
+  .try { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 14px; }
+  .try li::before { content: "→ "; font-family: "JetBrains Mono", monospace; font-size: 12px; opacity: .6; }
+</style>
+</head>
+<body class="detail on-light">
+  <nav class="top">
+    <a href="index.html" class="back">← Series 02</a>
+    <div class="pager"><a id="prev" href="#">Prev</a><span id="count"></span><a id="next" href="#">Next</a></div>
+  </nav>
+  <header class="intro">
+    <p class="eyebrow" id="kind"></p>
+    <h1 id="name"></h1>
+    <p class="pitch" id="pitch"></p>
+    <div class="specs">
+      <div><span class="k">Palette</span><div class="swatches" id="palette"></div></div>
+      <div><span class="k">Type</span><span id="fonts"></span></div>
+      <div><span class="k">Try this</span><ul class="try" id="try"></ul></div>
+    </div>
+  </header>
+  <section class="devices four" id="devices"></section>
+  <section class="refs local-only" hidden>
+    <h2>Pinterest moodboard</h2>
+    <p class="muted">The pins that pushed this direction.</p>
+    <div class="ref-grid" id="refs"></div>
+  </section>
+  <script src="shared/concepts.js"></script>
+  <script>
+    const list = window.CONCEPTS, $ = id => document.getElementById(id);
+    const id = new URLSearchParams(location.search).get('c') || list[0].id;
+    const i = Math.max(0, list.findIndex(c => c.id === id)), c = list[i];
+    document.title = c.name + ' · Sign-in concept';
+    const r = document.documentElement.style;
+    r.setProperty('--stage', c.stage); r.setProperty('--ink', c.ink); r.setProperty('--accent', c.accent);
+    $('kind').textContent = c.no + ' — ' + c.kind;
+    $('name').textContent = c.name;
+    $('pitch').textContent = c.pitch;
+    $('fonts').textContent = c.fonts;
+    $('try').innerHTML = c.try.map(t => `<li>${t}</li>`).join('');
+    $('palette').innerHTML = c.palette.map(h => `<span class="sw" style="--c:${h}"><i></i>${h}</span>`).join('');
+    $('count').textContent = `${c.no} / 10`;
+    $('prev').href = 'concept.html?c=' + list[(i - 1 + list.length) % list.length].id;
+    $('next').href = 'concept.html?c=' + list[(i + 1) % list.length].id;
+    const src = `concepts/${c.id}/screen.html`;
+    $('devices').innerHTML = [['ios', 'login', 'iPhone · Sign in'], ['ios', 'signup', 'iPhone · Sign up'], ['android', 'login', 'Android · Sign in'], ['android', 'signup', 'Android · Sign up']]
+      .map(([os, v, label]) => `<figure><div class="device" data-os="${os}" data-bar="dark" data-src="${src}?view=${v}" data-label="${c.name} ${label}"></div><figcaption>${label}</figcaption></figure>`).join('');
+    $('refs').innerHTML = c.refs.map(f => `<img src="../references/series2/picks/${f}" alt="Pinterest reference">`).join('');
+  </script>
+  <script src="../shared/devices.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* Device mockups: iPhone (393x852) and Android (412x915), rendered at native size then scaled to fit. */
+.device { position: relative; width: 100%; }
+.device-scale { position: absolute; top: 0; left: 0; transform-origin: 0 0; transform: scale(var(--s, .5)); }
+
+.frame { position: relative; box-sizing: content-box; }
+.frame .screen { position: relative; overflow: hidden; background: #000; isolation: isolate; }
+.frame iframe { display: block; border: 0; width: 100%; height: 100%; background: transparent; }
+
+/* ---------- iPhone 15 Pro ---------- */
+.frame.ios {
+  width: 393px; height: 852px; padding: 13px; border-radius: 68px;
+  background: linear-gradient(145deg, #5a5d63, #2a2c30 30%, #1b1c1f 60%, #44474c);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,255,255,.18),
+    inset 0 0 0 5px #0b0b0c,
+    0 50px 90px -30px rgba(0,0,0,.55),
+    0 30px 40px -25px rgba(0,0,0,.4);
+}
+.frame.ios .screen { width: 393px; height: 852px; border-radius: 55px; }
+.frame.ios .island {
+  position: absolute; top: 24px; left: 50%; width: 125px; height: 37px; margin-left: -62.5px;
+  background: #000; border-radius: 20px; z-index: 5; pointer-events: none;
+}
+.frame.ios .island::after { /* camera lens */
+  content: ""; position: absolute; right: 13px; top: 11px; width: 15px; height: 15px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2c3550 0 25%, #0b0d14 55%);
+}
+.frame.ios .btn { position: absolute; width: 4px; border-radius: 2px; background: linear-gradient(90deg, #2a2b2e, #6b6e74); }
+.frame.ios .btn.action { left: -3px; top: 140px; height: 32px; }
+.frame.ios .btn.vol-up { left: -3px; top: 205px; height: 62px; }
+.frame.ios .btn.vol-dn { left: -3px; top: 280px; height: 62px; }
+.frame.ios .btn.power { right: -3px; top: 230px; height: 100px; background: linear-gradient(270deg, #2a2b2e, #6b6e74); }
+
+/* ---------- Android (Pixel-style) ---------- */
+.frame.android {
+  width: 412px; height: 915px; padding: 10px; border-radius: 46px;
+  background: linear-gradient(160deg, #e9e7e2, #c9c6bf 40%, #a9a69f 75%, #d6d3cc);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,255,255,.6),
+    inset 0 0 0 4px #121212,
+    0 50px 90px -30px rgba(0,0,0,.5),
+    0 30px 40px -25px rgba(0,0,0,.35);
+}
+.frame.android .screen { width: 412px; height: 915px; border-radius: 37px; }
+.frame.android .punch {
+  position: absolute; top: 26px; left: 50%; width: 22px; height: 22px; margin-left: -11px;
+  background: radial-gradient(circle at 40% 40%, #2a2f3d 0 20%, #050507 60%); border-radius: 50%; z-index: 5; pointer-events: none;
+}
+.frame.android .btn { position: absolute; right: -3px; width: 4px; border-radius: 2px; background: linear-gradient(270deg, #8f8c86, #d9d6d0); }
+.frame.android .btn.power { top: 190px; height: 60px; }
+.frame.android .btn.vol { top: 280px; height: 110px; }
+
+/* ---------- Status bars (overlay, non-interactive) ---------- */
+.statusbar { position: absolute; inset: 0 0 auto 0; z-index: 4; pointer-events: none; display: flex; align-items: center; justify-content: space-between; color: #fff; }
+.device[data-bar="dark"] .statusbar { color: #0b0b0c; }
+.ios .statusbar { height: 54px; padding: 4px 34px 0 52px; font: 600 17px/1 -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif; letter-spacing: -.2px; }
+.android .statusbar { height: 46px; padding: 6px 26px 0 28px; font: 500 14.5px/1 "Roboto", "Google Sans", system-ui, sans-serif; }
+.statusbar .icons { display: flex; gap: 6px; align-items: center; }
+.statusbar svg { display: block; fill: currentColor; }
+
+.homebar { position: absolute; left: 50%; bottom: 8px; z-index: 4; pointer-events: none; transform: translateX(-50%); background: #fff; border-radius: 3px; }
+.device[data-bar="dark"] .homebar { background: #0b0b0c; }
+.ios .homebar { width: 139px; height: 5px; }
+.android .homebar { width: 108px; height: 4px; bottom: 9px; opacity: .85; }
+
+/* Sheen across the glass */
+.frame .glare { position: absolute; inset: 0; z-index: 6; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%); }

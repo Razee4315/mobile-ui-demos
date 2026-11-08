@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#c6f432">
+<title>Moko · Log in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/screen-base.css">
+<style>
+  :root { --ink: #1b1b1b; --cream: #fff6e5; --buddy: #c6f432; --pink: #ff8a8a; --blue: #7cc8ff; --sun: #ffd23f; --shadow: 0 4px 0 var(--ink); }
+  body { background: var(--cream); color: var(--ink); font: 500 15px/1.4 "Bricolage Grotesque", system-ui, sans-serif; display: flex; flex-direction: column; padding: var(--top) 20px var(--bottom); position: relative; }
+
+  /* Colour field behind the buddies; height follows the free space above the card */
+  .field-bg { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--content-top, 380px) + 26px); background: var(--buddy); transition: background .6s var(--ease), height .8s var(--ease); }
+  .field-bg svg { position: absolute; left: 0; bottom: -1px; width: 100%; height: 34px; display: block; fill: var(--cream); }
+  .dots { position: absolute; inset: 0; opacity: .18; background-image: radial-gradient(var(--ink) 1.3px, transparent 1.6px); background-size: 18px 18px; -webkit-mask: linear-gradient(#000, transparent 85%); mask: linear-gradient(#000, transparent 85%); }
+
+  header { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; height: 48px; }
+  .logo { display: flex; align-items: center; font-weight: 800; font-size: 30px; letter-spacing: -1.2px; line-height: 1; }
+  .logo .o { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); margin: 3px 1px 0; position: relative; }
+  .logo .o::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); top: 4px; left: 4px; animation: look 5s var(--ease) infinite; }
+  @keyframes look { 0%, 20% { transform: translate(0, 0); } 30%, 50% { transform: translate(4px, 1px); } 60%, 80% { transform: translate(-1px, 4px); } 100% { transform: translate(0, 0); } }
+  .streak { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 2.5px solid var(--ink); box-shadow: 0 3px 0 var(--ink); border-radius: 99px; padding: 5px 12px 5px 8px; font-weight: 700; font-size: 13.5px; transform: rotate(4deg); }
+  .streak .ico { width: 17px; height: 17px; color: #ff6b3d; }
+
+  /* Buddies */
+  .stage { position: absolute; left: 0; right: 0; z-index: 2; top: var(--head-bottom, 100px); height: calc(var(--content-top, 380px) - var(--head-bottom, 100px) + 30px); transition: height .8s var(--ease); pointer-events: none; }
+  .stage img { position: absolute; left: 50%; bottom: 0; height: 100%; width: auto; max-width: 92%; object-fit: contain; transform: translateX(-50%); transform-origin: 50% 100%; transition: opacity .5s var(--ease), transform .7s cubic-bezier(.34, 1.56, .64, 1); }
+  .stage .crew { height: 92%; animation: squish 2.8s ease-in-out infinite; }
+  .stage .solo { height: 96%; opacity: 0; transform: translateX(-50%) scale(.4) rotate(-14deg); }
+  [data-view="signup"] .stage .crew { opacity: 0; transform: translateX(-50%) scale(.5); animation: none; }
+  [data-view="signup"] .stage .solo { opacity: 1; transform: translateX(-50%) scale(1); animation: hop 1.6s ease-in-out infinite .7s; }
+  @keyframes squish { 0%, 100% { transform: translateX(-50%) scale(1, 1); } 50% { transform: translateX(-50%) scale(1.03, .97); } }
+  @keyframes hop { 0%, 100% { transform: translateX(-50%) translateY(0); } 45% { transform: translateX(-50%) translateY(-12px) rotate(2deg); } }
+  .sticker { position: absolute; z-index: 3; display: grid; place-items: center; background: #fff; border: 2.5px solid var(--ink); box-shadow: 0 3px 0 var(--ink); border-radius: 14px; font-weight: 800; animation: bob 4s ease-in-out infinite; }
+  .sticker.s1 { left: 18px; top: calc(var(--head-bottom, 100px) + 26px); padding: 6px 10px; font-size: 13px; rotate: -9deg; }
+  .sticker.s2 { right: 18px; top: calc(var(--head-bottom, 100px) + 66px); width: 42px; height: 42px; border-radius: 50%; background: var(--sun); animation-delay: -2s; }
+  .sticker .ico { width: 22px; height: 22px; }
+  @keyframes bob { 50% { translate: 0 -6px; } }
+
+  /* Card */
+  .card { margin-top: auto; position: relative; z-index: 3; }
+  .tabs { position: relative; display: grid; grid-template-columns: 1fr 1fr; border: 2.5px solid var(--ink); border-radius: 99px; padding: 4px; background: #fff; box-shadow: var(--shadow); margin-bottom: 18px; }
+  .tabs button { position: relative; z-index: 1; height: 40px; border-radius: 99px; font-weight: 700; font-size: 15px; }
+  .tabs .thumb { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 99px; background: var(--ink); transition: transform .5s cubic-bezier(.34, 1.4, .64, 1); }
+  [data-view="signup"] .tabs .thumb { transform: translateX(100%); }
+  [data-view="login"] .tabs [data-go="login"], [data-view="signup"] .tabs [data-go="signup"] { color: var(--buddy); transition: color .3s; }
+
+  h1 { font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -1.4px; margin: 0 0 16px; }
+  mark { background: none; color: inherit; position: relative; white-space: nowrap; }
+  mark::before { content: ""; position: absolute; left: -4px; right: -4px; bottom: 1px; height: 46%; background: var(--buddy); border-radius: 6px; z-index: -1; transform: rotate(-1.5deg); transition: background .6s; }
+  h1, mark { isolation: isolate; }
+
+  form { display: grid; gap: 10px; }
+  .field { height: 54px; border-radius: 18px; background: #fff; border: 2.5px solid var(--ink); box-shadow: var(--shadow); padding: 0 14px; gap: 10px; transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+  .field:focus-within { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+  .field input { font-weight: 500; font-size: 15.5px; }
+  .field input::placeholder { color: rgba(27,27,27,.45); }
+  .field .ico { opacity: .75; }
+  .eye { display: grid; }
+  .forgot { justify-self: end; font-size: 13.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; text-decoration-color: var(--buddy); margin: 0 4px; }
+
+  .primary { height: 58px; border-radius: 99px; background: var(--ink); color: var(--buddy); font-weight: 800; font-size: 17px; display: grid; place-items: center; margin-top: 4px; box-shadow: 0 5px 0 #000, 0 5px 0 2.5px var(--ink); transition: transform .12s, box-shadow .12s, color .6s; }
+  .primary:active { transform: translateY(4px); box-shadow: 0 1px 0 #000; }
+  .primary.done { background: var(--buddy); color: var(--ink); }
+
+  .buddies { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; font-weight: 700; font-size: 14px; }
+  .swatches { display: flex; gap: 8px; }
+  .swatches button { width: 30px; height: 30px; border-radius: 50%; background: var(--c); border: 2.5px solid var(--ink); transition: transform .3s cubic-bezier(.34, 1.56, .64, 1); position: relative; }
+  .swatches button[aria-pressed="true"] { transform: scale(1.18); box-shadow: 0 0 0 3px var(--cream), 0 0 0 5.5px var(--ink); }
+
+  .socials { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .socials button { height: 50px; border-radius: 99px; background: #fff; border: 2.5px solid var(--ink); box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; transition: transform .12s, box-shadow .12s; }
+  .socials button:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+  .socials .ico { width: 19px; height: 19px; }
+  .terms { font-size: 12.5px; text-align: center; margin: 10px 0 0; color: rgba(27,27,27,.6); }
+  .terms a { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="field-bg" aria-hidden="true">
+    <div class="dots"></div>
+    <svg viewBox="0 0 400 34" preserveAspectRatio="none"><path d="M0 34V18C40 2 70 2 110 14s70 16 110 2 80-18 120-4 50 12 60 8v16Z"/></svg>
+  </div>
+
+  <header class="rise" style="--d:0">
+    <div class="logo" aria-label="moko">m<span class="o"></span>k<span class="o"></span></div>
+    <span class="streak"><i data-icon="flame"></i>12-day streak</span>
+  </header>
+
+  <div class="stage rise" style="--d:1" aria-hidden="true">
+    <img class="crew" src="../../assets/web/moko-crew.webp" width="900" height="673" alt="">
+    <img class="solo" src="../../assets/web/moko-solo.webp" width="900" height="846" alt="">
+  </div>
+  <span class="sticker s1 rise" style="--d:2" aria-hidden="true">+1 habit!</span>
+  <span class="sticker s2 rise" style="--d:2" aria-hidden="true"><i data-icon="spark"></i></span>
+
+  <div class="card" data-content>
+    <div class="tabs rise" style="--d:2" role="tablist">
+      <span class="thumb" aria-hidden="true"></span>
+      <button role="tab" data-go="login">Log in</button>
+      <button role="tab" data-go="signup">Sign up</button>
+    </div>
+    <main class="panes">
+      <section class="pane login" aria-label="Log in">
+        <h1 class="rise" style="--d:3">Tiny habits,<br>big <mark>wins.</mark></h1>
+        <form class="rise" style="--d:4">
+          <label class="field"><i data-icon="mail"></i><span class="sr">Email</span><input type="email" placeholder="you@email.com" autocomplete="email"></label>
+          <label class="field"><i data-icon="lock"></i><span class="sr">Password</span><input type="password" placeholder="Password" autocomplete="current-password">
+            <button class="eye" data-eye type="button" aria-label="Show password"><i data-icon="eye"></i><i data-icon="eye-off"></i></button></label>
+          <a class="forgot" href="#" data-fake>Forgot password?</a>
+          <button class="primary" type="submit"><span class="btn-label">Let's go!</span></button>
+        </form>
+        <div class="socials rise" style="--d:5">
+          <button data-fake><i data-icon="apple"></i>Apple</button>
+          <button data-fake><i data-icon="google"></i>Google</button>
+        </div>
+      </section>
+      <section class="pane signup" aria-label="Sign up">
+        <h1>Meet your<br>new <mark>buddy.</mark></h1>
+        <form>
+          <label class="field"><i data-icon="user"></i><span class="sr">Name</span><input type="text" placeholder="Your first name" autocomplete="given-name"></label>
+          <label class="field"><i data-icon="mail"></i><span class="sr">Email</span><input type="email" placeholder="you@email.com" autocomplete="email"></label>
+          <label class="field"><i data-icon="lock"></i><span class="sr">Password</span><input type="password" placeholder="Make a password" autocomplete="new-password">
+            <button class="eye" data-eye type="button" aria-label="Show password"><i data-icon="eye"></i><i data-icon="eye-off"></i></button></label>
+          <div class="buddies">Pick a colour
+            <div class="swatches" role="group" aria-label="Buddy colour">
+              <button type="button" style="--c:#c6f432" aria-pressed="true" aria-label="Lime"></button>
+              <button type="button" style="--c:#ff8a8a" aria-pressed="false" aria-label="Coral"></button>
+              <button type="button" style="--c:#7cc8ff" aria-pressed="false" aria-label="Sky"></button>
+              <button type="button" style="--c:#ffd23f" aria-pressed="false" aria-label="Sunny"></button>
+            </div>
+          </div>
+          <button class="primary" type="submit"><span class="btn-label">Create my buddy</span></button>
+        </form>
+        <p class="terms">By signing up you agree to our <a href="#" data-fake>Terms</a>.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="../../shared/icons.js"></script>
+  <script src="../../shared/screen.js"></script>
+  <script>
+    // Buddy colour picker repaints the whole screen accent
+    document.querySelectorAll('.swatches button').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.swatches button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      document.documentElement.style.setProperty('--buddy', b.style.getPropertyValue('--c'));
+    }));
+  </script>
+</body>
+</html>

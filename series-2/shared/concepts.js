@@ -1,0 +1,48 @@
+// Series 2 showcase data.
+window.CONCEPTS = [
+  {
+    id: 'wisp', no: '06', name: 'Wisp', kind: 'AI chat companion',
+    pitch: 'A living orb drawn by a WebGL shader in apricot, lilac and sea-glass, with two tiny eyes. It talks the way an AI does, token by token, and sign up happens as a chat.',
+    try: ['Move or drag over the orb: its eyes follow you', 'Poke the orb, it squishes and says something', 'Type a password: it closes its eyes and blushes', 'Tap a suggestion chip', 'Sign up: answer its questions in the chat'],
+    stage: '#fbf3ec', ink: '#24222b', accent: '#ffcaa8',
+    palette: ['#FBF8F4', '#FFCAA8', '#D6D0FF', '#BFE9DC', '#24222B'],
+    fonts: 'Geist · Newsreader italic',
+    refs: ['018_a21c6967.jpg', '030_4ce881ed.jpg', '031_f44c5aa2.jpg', '105_6b20a8db.jpg'],
+  },
+  {
+    id: 'peep', no: '07', name: 'Peep', kind: 'Customer support desk',
+    pitch: 'A butter-yellow speech bubble with googly eyes on low-damped springs, so its pupils wobble as they catch up. It watches your cursor, covers its eyes for the password, and peeks when you reveal it.',
+    try: ['Type an email: the eyes track your cursor', 'Focus the password: hands over the eyes', 'Tap the eye icon: Peep peeks', 'Poke Peep, or submit a bad email', 'Sign up: your company name builds the URL'],
+    stage: '#e8f5ec', ink: '#1f2622', accent: '#ffe27a',
+    palette: ['#DFF3E7', '#FFFDF6', '#FFE27A', '#FF9E8F', '#1F2622'],
+    fonts: 'Figtree · Fredoka',
+    refs: ['002_d2f91f9f.jpg', '121_e363230f.jpg', '090_43f4a811.jpg', '043_855770e7.jpg'],
+  },
+  {
+    id: 'kin', no: '08', name: 'Kin', kind: 'Team workspace (SaaS)',
+    pitch: 'Each team is a soft field of colour drifting like a lava lamp. Fields scatter from your finger. Login is email-first: a work domain triggers SSO and the password field folds away.',
+    try: ['Drag through the colours: they scatter', 'Type you@company.com: SSO is detected', 'Try a gmail address: the password comes back', 'Sign up: tap a colour to claim it', 'Press continue: the fields swirl'],
+    stage: '#f3eee3', ink: '#1f1d1a', accent: '#a9d4ff',
+    palette: ['#F5F1E8', '#FFB38A', '#FFE38A', '#A9D4FF', '#A8E6C9'],
+    fonts: 'Hanken Grotesk · IBM Plex Mono',
+    refs: ['100_a1b30946.jpg', '060_632e9454.jpg', '086_7033c910.jpg', '101_fc0a5f15.jpg'],
+  },
+  {
+    id: 'ease', no: '09', name: 'Ease', kind: 'Motion design tool',
+    pitch: 'The hero is a working easing editor. Drag the handles and the curve becomes the screen’s --ease, so the headline, buttons and page switch all move with what you drew. Your curve becomes your profile badge.',
+    try: ['Drag the two curve handles', 'Tap Spring, Smooth, Snappy, Linear', 'Scrub the timeline under the ball', 'Switch to sign up and watch the type move', 'Sign up: your curve is your badge'],
+    stage: '#f4f0e8', ink: '#1c1b19', accent: '#ff7a59',
+    palette: ['#F7F4EE', '#FF7A59', '#9CC9FF', '#FFE07A', '#1C1B19'],
+    fonts: 'Schibsted Grotesk · JetBrains Mono',
+    refs: ['115_f8370460.jpg', '087_81bdcb70.jpg', '080_ead22af5.jpg', '074_e7f5b3e1.jpg'],
+  },
+  {
+    id: 'muse', no: '10', name: 'Muse', kind: 'AI image studio',
+    pitch: 'Pixel-aligned still lifes generated with Codex edit chains. Prompts type themselves, then the next variation develops: a scan line, grain and blur resolving into the new flower while everything else holds still.',
+    try: ['Watch the prompt write itself', 'Drag on the image to tilt it', 'Press and hold the image to re-roll', 'Tap the dots or the sparkle button', 'Sign up: pick Pear, Peach, Lemon or Fig'],
+    stage: '#f6ece6', ink: '#26211d', accent: '#c98f7b',
+    palette: ['#F6F1EB', '#F2D9CF', '#C98F7B', '#A9BBA2', '#26211D'],
+    fonts: 'Cormorant Garamond · Albert Sans',
+    refs: ['099_b0dcc39a.jpg', '102_0b6b810a.jpg', '104_7ebd5a4c.jpg', '059_38a24577.jpg'],
+  },
+];

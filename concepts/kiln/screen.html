@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Kiln · Log in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/screen-base.css">
+<style>
+  :root { --bg: #0a0a0a; --ink: #f6efe9; --muted: rgba(246,239,233,.55); --ember: #ff5a1f; --amber: #ffb36b; --line: rgba(246,239,233,.16); }
+  body { background: var(--bg); color: var(--ink); font: 400 15px/1.45 "DM Sans", system-ui, sans-serif; display: flex; flex-direction: column; padding: var(--top) 22px var(--bottom); position: relative; }
+  body::before { /* ember glow */ content: ""; position: absolute; width: 520px; height: 520px; right: -230px; top: 18%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,90,31,.42), rgba(255,90,31,.12) 55%, transparent); filter: blur(10px); animation: breathe 6s ease-in-out infinite; pointer-events: none; }
+  body::after { /* grain */ content: ""; position: absolute; inset: 0; opacity: .09; pointer-events: none; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  @keyframes breathe { 50% { transform: scale(1.12); opacity: .8; } }
+  body > * { position: relative; z-index: 1; }
+
+  header { display: flex; align-items: center; justify-content: space-between; height: 46px; }
+  .brand { display: flex; align-items: center; gap: 10px; font: 800 19px/1 Syne, sans-serif; letter-spacing: 3px; }
+  .brand svg { width: 28px; height: 28px; }
+  .switch { font: 500 12px/1 "DM Mono", monospace; letter-spacing: .6px; text-transform: uppercase; color: var(--ink); text-decoration: none; padding: 9px 13px; border: 1px solid var(--line); border-radius: 99px; }
+
+  .ticker { margin: 12px -22px 0; border-block: 1px solid var(--line); overflow: hidden; white-space: nowrap; font: 400 11.5px/1 "DM Mono", monospace; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); }
+  .ticker div { display: inline-flex; gap: 22px; padding: 10px 0; animation: marquee 22s linear infinite; }
+  .ticker b { color: var(--ink); font-weight: 500; }
+  .ticker .up { color: #7dffb0; }
+  .ticker i { font-style: normal; color: var(--ember); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  .panes { flex: 1; }
+  .pane { display: flex; flex-direction: column; }
+  .poster { position: relative; flex: 1; display: flex; align-items: center; min-height: 0; }
+  h1 { font: 800 clamp(38px, 11.4vw, 50px)/.92 Syne, sans-serif; letter-spacing: -1px; text-transform: uppercase; margin: 0; position: relative; z-index: 2; }
+  h1 .outline { color: transparent; -webkit-text-stroke: 1.4px var(--ink); }
+  h1 .hot { color: var(--ember); }
+  .art { position: absolute; z-index: 1; right: -46px; top: 50%; width: 250px; height: 250px; translate: 0 -54%; pointer-events: none; }
+  .art img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(255,90,31,.35)); animation: turn 9s ease-in-out infinite; }
+  @keyframes turn { 0%, 100% { transform: rotate(-6deg) translateY(0); } 50% { transform: rotate(6deg) translateY(-10px); } }
+  .signup .art { width: 210px; height: 230px; right: -24px; }
+  .signup .art img { animation-duration: 7s; }
+
+  .tagline { display: flex; justify-content: space-between; align-items: end; gap: 12px; font-size: 13.5px; color: var(--muted); margin: 0 0 18px; }
+  .tagline span:last-child { font: 400 11px/1.3 "DM Mono", monospace; text-align: right; text-transform: uppercase; letter-spacing: .5px; }
+
+  form { display: grid; gap: 4px; }
+  .field { flex-direction: column; align-items: stretch; gap: 2px; padding: 10px 0 8px; border-bottom: 1px solid var(--line); transition: border-color .3s; }
+  .field::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1.5px; width: 100%; background: linear-gradient(90deg, var(--ember), var(--amber)); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+  .field:focus-within::after { transform: scaleX(1); }
+  .field .lbl { font: 500 10.5px/1 "DM Mono", monospace; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+  .field .in { display: flex; align-items: center; gap: 10px; }
+  .field input { color: var(--ink); font-size: 17px; font-weight: 500; height: 30px; }
+  .field input::placeholder { color: rgba(246,239,233,.3); }
+  .field a, .eye { color: var(--muted); font-size: 12.5px; text-decoration: none; display: grid; }
+  .strength { --meter: linear-gradient(90deg, var(--ember), var(--amber)); color: var(--ink); margin-top: 8px; }
+  .strength .strength-label { font-family: "DM Mono", monospace; text-transform: uppercase; font-size: 10px; letter-spacing: .6px; }
+
+  .actions { display: grid; grid-template-columns: 1fr 60px; gap: 10px; margin-top: 18px; }
+  .primary { height: 60px; border-radius: 16px; background: var(--ember); color: #160600; font: 700 16px/1 "DM Sans"; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: 0 18px 40px -14px rgba(255,90,31,.85), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .2s var(--ease); overflow: hidden; }
+  .primary .btn-label { width: 100%; justify-content: space-between; }
+  .primary:active { transform: scale(.98); }
+  .primary.done { background: #7dffb0; }
+  .faceid { height: 60px; border-radius: 16px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); background: rgba(246,239,233,.04); }
+  .faceid .ico { width: 26px; height: 26px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; margin: 16px 2px 4px; font-size: 13px; color: var(--muted); }
+  .foot .sec { display: inline-flex; align-items: center; gap: 6px; font: 400 10.5px/1 "DM Mono", monospace; letter-spacing: .5px; text-transform: uppercase; }
+  .foot .sec .ico { width: 14px; height: 14px; color: #7dffb0; }
+  .foot a { color: var(--ink); font-weight: 600; text-decoration: none; }
+  .foot a span { color: var(--ember); }
+</style>
+</head>
+<body>
+  <header class="rise" style="--d:0">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M5 29V15a11 11 0 0 1 22 0v14" fill="none" stroke="#f6efe9" stroke-width="2.4"/>
+        <path d="M16 27c-3 0-5-2-5-4.8 0-2.6 1.8-4 2.8-5.9.3 1.3 1 2.2 1.9 2.6.2-2.7 1.3-4.7 2.9-6-.2 2.3 2.7 4.4 2.7 8.3 0 3.4-2 5.8-5.3 5.8Z" fill="#ff5a1f"/>
+        <path d="M2 29h28" stroke="#f6efe9" stroke-width="2.4"/>
+      </svg>
+      KILN
+    </div>
+    <a class="switch only-login" href="#" data-go="signup">Open account</a>
+    <a class="switch only-signup" href="#" data-go="login">Log in</a>
+  </header>
+
+  <div class="ticker rise" style="--d:1" aria-hidden="true">
+    <div>
+      <span><b>Vault APY</b> 4.85% <span class="up">▲0.20</span></span><i>✦</i><span><b>FX fee</b> 0.00%</span><i>✦</i><span><b>Cards in</b> 140 countries</span><i>✦</i><span><b>Gold</b> $2,742 <span class="up">▲1.4%</span></span><i>✦</i>
+      <span><b>Vault APY</b> 4.85% <span class="up">▲0.20</span></span><i>✦</i><span><b>FX fee</b> 0.00%</span><i>✦</i><span><b>Cards in</b> 140 countries</span><i>✦</i><span><b>Gold</b> $2,742 <span class="up">▲1.4%</span></span><i>✦</i>
+    </div>
+  </div>
+
+  <main class="panes">
+    <section class="pane login" aria-label="Log in">
+      <div class="poster rise" style="--d:2">
+        <h1>Money,<br><span class="outline">forged</span><br>in <span class="hot">fire.</span></h1>
+        <div class="art" aria-hidden="true"><img src="../../assets/web/kiln-sculpt.webp" width="900" height="643" alt=""></div>
+      </div>
+      <p class="tagline rise" style="--d:3"><span>Spend, save and grow in one card.<br>No fees hiding in the ashes.</span><span>Est.<br>2026</span></p>
+      <form class="rise" style="--d:4">
+        <label class="field"><span class="lbl">Email</span><span class="in"><input type="email" placeholder="name@domain.com" autocomplete="email"></span></label>
+        <label class="field"><span class="lbl">Password</span><span class="in"><input type="password" placeholder="••••••••••" autocomplete="current-password"><a href="#" data-fake>Forgot?</a></span></label>
+        <div class="actions">
+          <button class="primary" type="submit"><span class="btn-label">Log in <i data-icon="arrow-ne"></i></span></button>
+          <button class="faceid" type="button" data-fake aria-label="Log in with Face ID"><i data-icon="faceid"></i></button>
+        </div>
+      </form>
+      <div class="foot rise" style="--d:5"><span class="sec"><i data-icon="lock"></i>256-bit encrypted</span><a href="#" data-go="signup">New here? <span>Open an account</span></a></div>
+    </section>
+
+    <section class="pane signup" aria-label="Open account">
+      <div class="poster">
+        <h1>Start<br><span class="outline">your</span><br><span class="hot">vault.</span></h1>
+        <div class="art" aria-hidden="true"><img src="../../assets/web/kiln-coins.webp" width="787" height="900" alt=""></div>
+      </div>
+      <p class="tagline"><span>Takes 3 minutes. Your first card<br>ships free, anywhere.</span><span>Step<br>1 / 3</span></p>
+      <form>
+        <label class="field"><span class="lbl">Full name</span><span class="in"><input type="text" placeholder="As on your ID" autocomplete="name"></span></label>
+        <label class="field"><span class="lbl">Email</span><span class="in"><input type="email" placeholder="name@domain.com" autocomplete="email"></span></label>
+        <label class="field"><span class="lbl">Password</span><span class="in"><input type="password" placeholder="12+ characters" autocomplete="new-password" data-strength>
+          <button class="eye" data-eye type="button" aria-label="Show password"><i data-icon="eye"></i><i data-icon="eye-off"></i></button></span></label>
+        <div class="strength" data-score="0"><i></i><i></i><i></i><i></i><span class="strength-label"></span></div>
+        <div class="actions">
+          <button class="primary" type="submit"><span class="btn-label">Open my vault <i data-icon="arrow-ne"></i></span></button>
+          <button class="faceid" type="button" data-fake aria-label="Continue with Apple"><i data-icon="apple"></i></button>
+        </div>
+      </form>
+      <div class="foot"><span class="sec"><i data-icon="lock"></i>Bank-grade security</span><a href="#" data-go="login">Have an account? <span>Log in</span></a></div>
+    </section>
+  </main>
+
+  <script src="../../shared/icons.js"></script>
+  <script src="../../shared/screen.js"></script>
+</body>
+</html>

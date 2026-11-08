@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lume — Liquid Chrome</title>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ======================= SIGN IN ======================= -->
+<section class="screen" data-screen="signin" aria-labelledby="si-title">
+  <div class="head">
+    <img src="../../assets/chrome/logo.webp" alt="" width="160" height="161">
+    <b>lume</b>
+  </div>
+  <div class="si-hero">
+    <img class="float c" data-depth="18" src="../../assets/chrome/depth-1.webp" alt="" style="left:30px; top:24px; width:38px" width="220" height="222">
+    <img class="hero float" data-depth="7" src="../../assets/chrome/hero.webp" alt="Liquid chrome bowl cradling a glowing pearl" width="560" height="420">
+    <div class="copy">
+      <p class="eyebrow">Chef-crafted · tonight</p>
+      <h1 class="display" id="si-title" style="margin-top:14px">Dinner, <b>quietly</b> exceptional.</h1>
+    </div>
+  </div>
+  <form class="pearl panel shake-target" data-form="signin" data-next="home">
+    <div class="field">
+      <label for="si-id">Email or phone</label>
+      <div class="control"><i class="ph-light ph-envelope-simple" aria-hidden="true"></i>
+        <input id="si-id" type="text" inputmode="email" autocomplete="username" required data-kind="email-or-phone" data-demo-bad="sam@lume" value="sam.rivera@mail.com" placeholder="you@example.com" aria-describedby="si-id-err"></div>
+      <p class="field-error" id="si-id-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <div class="row-between"><label for="si-pw">Password</label><a href="#forgot" class="link" data-go="forgot" style="font-size:13px">Forgot password?</a></div>
+      <div class="control"><i class="ph-light ph-lock-simple" aria-hidden="true"></i>
+        <input id="si-pw" type="password" autocomplete="current-password" required data-minlength="6" value="truffleseason" placeholder="Your password" aria-describedby="si-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-light ph-eye"></i><i class="ph-light ph-eye-slash"></i></button></div>
+      <p class="field-error" id="si-pw-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit" style="margin-top:22px"><span class="btn-label">Sign in</span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or">or</div>
+    <div class="socials">
+      <button type="button" class="btn-p" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-p" data-go="home"><i class="ph-light ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">New to Lume? <a href="#signup" class="link" data-go="signup">Request a seat</a></p>
+</section>
+
+<!-- ======================= SIGN UP ======================= -->
+<section class="screen" data-screen="signup" aria-labelledby="su-title">
+  <div class="head">
+    <button class="back pearl" data-go="signin" aria-label="Back to sign in"><i class="ph-light ph-arrow-left"></i></button>
+    <span class="eyebrow">Membership</span>
+  </div>
+  <div class="su-head">
+    <img class="float" data-depth="14" src="../../assets/chrome/depth-2.webp" alt="" style="right:-24px; top:-4px; width:150px; --rot:-10deg" width="220" height="204">
+    <img class="float b" data-depth="22" src="../../assets/chrome/depth-1.webp" alt="" style="right:120px; top:24px; width:34px" width="220" height="222">
+    <h1 class="display" id="su-title" style="max-width:250px">Your table, <b>reserved.</b></h1>
+    <p class="lede" style="max-width:280px">Seasonal menus from twelve chefs. Your first course is on the house.</p>
+  </div>
+  <form class="pearl panel shake-target" data-form="signup" data-next="home">
+    <div class="field">
+      <label for="su-name">Full name</label>
+      <div class="control"><i class="ph-light ph-user" aria-hidden="true"></i>
+        <input id="su-name" type="text" autocomplete="name" required placeholder="Sam Rivera" data-msg-empty="Please tell us your name" aria-describedby="su-name-err"></div>
+      <p class="field-error" id="su-name-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <label for="su-email">Email</label>
+      <div class="control"><i class="ph-light ph-envelope-simple" aria-hidden="true"></i>
+        <input id="su-email" type="email" autocomplete="email" required placeholder="you@example.com" data-demo-bad="sam@lume" data-msg="Please check your email address" aria-describedby="su-email-err"></div>
+      <p class="field-error" id="su-email-err" role="alert"></p>
+    </div>
+    <div class="field" style="margin-bottom:12px">
+      <label for="su-pw">Password</label>
+      <div class="control"><i class="ph-light ph-lock-simple" aria-hidden="true"></i>
+        <input id="su-pw" type="password" autocomplete="new-password" required data-minlength="8" data-strength="su-meter" placeholder="8+ characters" aria-describedby="su-meter su-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-light ph-eye"></i><i class="ph-light ph-eye-slash"></i></button></div>
+      <p class="field-error" id="su-pw-err" role="alert"></p>
+    </div>
+    <div class="meter" id="su-meter" data-level="0" aria-live="polite" data-labels="Too short|Fragile|Fair|Strong|Flawless" data-empty="Not set">
+      <span class="meter-ring" aria-hidden="true"></span><span class="meter-bar" aria-hidden="true"><i></i></span><span class="meter-label" data-meter-label></span>
+    </div>
+    <div class="field">
+      <label class="check" style="text-transform:none; letter-spacing:0; font:500 14px/1.45 var(--font); color:var(--ink-2)"><input type="checkbox" required data-msg="Please accept the terms to continue" aria-describedby="su-terms-err"> <span>I agree to the <a href="#" onclick="return false">Terms</a> and <a href="#" onclick="return false">Privacy Policy</a>.</span></label>
+      <p class="field-error" id="su-terms-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit"><span class="btn-label">Create membership</span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or">or</div>
+    <div class="socials">
+      <button type="button" class="btn-p" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-p" data-go="home"><i class="ph-light ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">Already a member? <a href="#signin" class="link" data-go="signin">Sign in</a></p>
+</section>
+
+<!-- ======================= FORGOT ======================= -->
+<section class="screen" data-screen="forgot" aria-labelledby="fp-title">
+  <div class="head">
+    <button class="back pearl" data-go="signin" aria-label="Back to sign in"><i class="ph-light ph-arrow-left"></i></button>
+  </div>
+  <div data-when="form">
+    <div class="fp-art"><img class="splash float" data-depth="10" src="../../assets/chrome/depth-3.webp" alt="" width="220" height="166"></div>
+    <div style="padding:0 var(--sp-6) 24px">
+      <h1 class="display" id="fp-title">Reset, <b>gently.</b></h1>
+      <p class="lede">Enter your email and we’ll send a private link to choose a new password.</p>
+    </div>
+    <form class="pearl panel shake-target" data-form="forgot">
+      <div class="field">
+        <label for="fp-email">Email</label>
+        <div class="control"><i class="ph-light ph-envelope-simple" aria-hidden="true"></i>
+          <input id="fp-email" type="email" autocomplete="email" required value="sam.rivera@mail.com" placeholder="you@example.com" data-demo-bad="sam.rivera@mail" data-msg="Please check your email address" aria-describedby="fp-email-err"></div>
+        <p class="field-error" id="fp-email-err" role="alert"></p>
+      </div>
+      <button class="btn" type="submit" style="margin-top:8px"><span class="btn-label">Send reset link</span><span class="spinner" aria-hidden="true"></span></button>
+    </form>
+    <p class="foot">Remembered it? <a href="#signin" class="link" data-go="signin">Back to sign in</a></p>
+  </div>
+
+  <div data-when="sent" aria-live="polite">
+    <div class="sent-art"><span class="halo-ring soft"></span><span class="halo-ring"></span><div class="sent-core pearl"><i class="ph-light ph-envelope-open" aria-hidden="true"></i></div></div>
+    <div style="padding:0 var(--sp-6)">
+      <p class="eyebrow">Link sent</p>
+      <h2 class="display" style="margin-top:14px">Check your <b>inbox.</b></h2>
+      <p class="lede">We sent a private link to<br><span class="mail-chip" data-sent-email>sam.rivera@mail.com</span><br>It expires in 15 minutes.</p>
+    </div>
+    <div class="pearl panel" style="margin-top:24px">
+      <a class="btn" href="#" onclick="return false"><span class="btn-label">Open mail <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span></a>
+      <button type="button" class="resend" data-resend data-seconds="30"><span class="tick" aria-hidden="true"></span><span>Resend in <span data-count>0:30</span></span></button>
+    </div>
+    <p class="foot"><button type="button" class="link" data-reset-state>Use a different email</button></p>
+  </div>
+</section>
+
+<!-- ======================= HOME ======================= -->
+<section class="screen home" data-screen="home" aria-labelledby="home-title">
+  <div class="home-top">
+    <div><p class="eyebrow">Delivering to</p><p style="font-weight:700; margin-top:4px">The Linden, Suite 8 <i class="ph-light ph-caret-down" aria-hidden="true"></i></p></div>
+    <button class="avatar" aria-label="Profile, Sam Rivera">SR</button>
+  </div>
+  <div class="home-greet">
+    <h1 class="display" id="home-title">Good evening, <b>Sam.</b></h1>
+    <p class="lede" style="margin-top:8px">Three chefs are cooking for you tonight.</p>
+  </div>
+
+  <article class="tasting">
+    <img src="../../assets/chrome/home-salmon.webp" alt="Salmon poke bowl with avocado fan in a white bowl" width="720" height="480">
+    <span class="chip pearl">Tonight’s tasting</span>
+    <div class="cap pearl">
+      <div><h2>Ocean Garden, five courses</h2><p>Chef Aiko Tan · arrives 8:15 pm</p></div>
+      <button class="go" aria-label="View Ocean Garden tasting"><i class="ph-light ph-arrow-right"></i></button>
+    </div>
+  </article>
+
+  <div class="sec-head"><h2>Curated <b>for you</b></h2><a href="#" class="link" style="font-size:13px">See all</a></div>
+  <div class="curated">
+    <article class="course"><div class="ph"><img src="../../assets/chrome/home-burrata.webp" alt="Burrata with heirloom tomatoes" width="720" height="480"></div><h3>Burrata &amp; heirlooms</h3><p>Maison Vert · $24</p></article>
+    <article class="course"><div class="ph"><img src="../../assets/chrome/home-pasta.webp" alt="Truffle tagliatelle" width="720" height="480"></div><h3>Truffle tagliatelle</h3><p>Ossa · $32</p></article>
+    <article class="course"><div class="ph"><img src="../../assets/chrome/home-matcha.webp" alt="Matcha tiramisu" width="720" height="480"></div><h3>Matcha tiramisu</h3><p>Kumo · $14</p></article>
+  </div>
+
+  <div class="sec-head"><h2>Dine by <b>mood</b></h2></div>
+  <div class="moods" role="group" aria-label="Mood">
+    <button class="mood" aria-pressed="true">Light &amp; bright</button>
+    <button class="mood" aria-pressed="false">Date night</button>
+    <button class="mood" aria-pressed="false">Plant-led</button>
+    <button class="mood" aria-pressed="false">Comfort, elevated</button>
+  </div>
+
+  <nav class="tabbar pearl" role="tablist" aria-label="Main">
+    <button role="tab" aria-selected="true"><i class="ph-light ph-sparkle"></i><i class="ph-fill ph-sparkle"></i>Tonight</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-magnifying-glass"></i><i class="ph-fill ph-magnifying-glass"></i>Explore</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-chef-hat"></i><i class="ph-fill ph-chef-hat"></i>Chefs</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-bag-simple"></i><i class="ph-fill ph-bag-simple"></i>Orders</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-user"></i><i class="ph-fill ph-user"></i>Me</button>
+  </nav>
+</section>
+
+</div>
+<script src="../../shared/app.js"></script>
+<script>
+  document.querySelectorAll('.mood').forEach((c) => c.addEventListener('click', () => document.querySelectorAll('.mood').forEach((x) => x.setAttribute('aria-pressed', String(x === c)))));
+</script>
+</body>
+</html>

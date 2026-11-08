@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hearthly — Plush Textile</title>
+<meta name="theme-color" content="#E9DCC6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ======================= SIGN IN ======================= -->
+<section class="screen" data-screen="signin" aria-labelledby="si-title">
+  <div class="brand">
+    <img src="../../assets/plush/logo.webp" alt="" width="160" height="204">
+    <b>Hearthly</b>
+    <span class="open patch sage">23 kitchens open</span>
+  </div>
+  <div class="si-hero">
+    <img class="pot float" data-depth="6" src="../../assets/plush/hero.webp" alt="Felt cooking pot with a stitched heart, wool steam and a little bread loaf" style="--rot:-2deg" width="560" height="581">
+    <div class="bubble patch oat">“Leek &amp; potato soup is on the hob.”<small>Margo · 2 doors down</small></div>
+    <img class="float b" data-depth="14" src="../../assets/plush/depth-1.webp" alt="" style="right:34px; top:166px; width:46px; --rot:14deg" width="220" height="275">
+  </div>
+  <div class="si-title">
+    <h1 class="display" id="si-title">Supper’s on, <em>neighbour.</em></h1>
+  </div>
+  <form class="patch form-patch shake-target" data-form="signin" data-next="home">
+    <div class="field">
+      <label for="si-id">Email or phone</label>
+      <div class="control"><i class="ph-duotone ph-envelope-simple" aria-hidden="true"></i>
+        <input id="si-id" type="text" inputmode="email" autocomplete="username" required data-kind="email-or-phone" data-demo-bad="sam@hearthly" value="sam.rivera@mail.com" placeholder="you@example.com" aria-describedby="si-id-err"></div>
+      <p class="field-error" id="si-id-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <div class="row-between"><label for="si-pw">Password</label><a href="#forgot" class="link" data-go="forgot" style="font-size:14px">Forgot password?</a></div>
+      <div class="control"><i class="ph-duotone ph-lock-key" aria-hidden="true"></i>
+        <input id="si-pw" type="password" autocomplete="current-password" required data-minlength="6" value="sundayroast" placeholder="Your password" aria-describedby="si-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-duotone ph-eye"></i><i class="ph-duotone ph-eye-slash"></i></button></div>
+      <p class="field-error" id="si-pw-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit" style="margin-top:18px"><span class="btn-label">Come on in</span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or">or</div>
+    <div class="socials">
+      <button type="button" class="btn-soft" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-soft" data-go="home"><i class="ph-duotone ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">New around here? <a href="#signup" class="link" data-go="signup">Pull up a chair</a></p>
+</section>
+
+<!-- ======================= SIGN UP ======================= -->
+<section class="screen" data-screen="signup" aria-labelledby="su-title">
+  <div class="brand">
+    <button class="back patch oat" data-go="signin" aria-label="Back to sign in"><i class="ph-duotone ph-arrow-left"></i></button>
+  </div>
+  <div class="su-head">
+    <img class="float" data-depth="12" src="../../assets/plush/depth-2.webp" alt="" style="right:20px; top:-34px; width:86px; --rot:12deg" width="220" height="219">
+    <img class="float b" data-depth="8" src="../../assets/plush/depth-3.webp" alt="" style="right:96px; top:20px; width:50px; --rot:-18deg" width="220" height="214">
+    <p class="kicker">Join the table</p>
+    <h1 class="display" id="su-title" style="margin-top:12px; font-size:34px; max-width:250px">Real food from <em>real kitchens.</em></h1>
+    <p class="lede" style="max-width:280px">Your first plate comes with a handwritten note from the cook.</p>
+  </div>
+  <form class="patch form-patch shake-target" data-form="signup" data-next="home">
+    <div class="field">
+      <label for="su-name">Your name</label>
+      <div class="control"><i class="ph-duotone ph-hand-waving" aria-hidden="true"></i>
+        <input id="su-name" type="text" autocomplete="name" required placeholder="Sam Rivera" data-msg-empty="What should your cooks call you?" aria-describedby="su-name-err"></div>
+      <p class="field-error" id="su-name-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <label for="su-email">Email</label>
+      <div class="control"><i class="ph-duotone ph-envelope-simple" aria-hidden="true"></i>
+        <input id="su-email" type="email" autocomplete="email" required placeholder="you@example.com" data-demo-bad="sam@hearthly" aria-describedby="su-email-err"></div>
+      <p class="field-error" id="su-email-err" role="alert"></p>
+    </div>
+    <div class="field" style="margin-bottom:10px">
+      <label for="su-pw">Password</label>
+      <div class="control"><i class="ph-duotone ph-lock-key" aria-hidden="true"></i>
+        <input id="su-pw" type="password" autocomplete="new-password" required data-minlength="8" data-strength="su-meter" placeholder="8+ characters" aria-describedby="su-meter su-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-duotone ph-eye"></i><i class="ph-duotone ph-eye-slash"></i></button></div>
+      <p class="field-error" id="su-pw-err" role="alert"></p>
+    </div>
+    <div class="meter" id="su-meter" data-level="0" aria-live="polite" data-labels="A bit thin|Loosely knit|Getting cosy|Tightly woven|Hand-stitched, sturdy" data-empty="Mix letters, numbers and a symbol">
+      <div class="meter-thread"></div>
+      <span class="meter-label" data-meter-label></span>
+    </div>
+    <div class="field">
+      <label class="check"><input type="checkbox" required data-msg="Please accept to continue" aria-describedby="su-terms-err"> <span>I agree to the <a href="#" onclick="return false">House Rules</a> and <a href="#" onclick="return false">Privacy Policy</a>.</span></label>
+      <p class="field-error" id="su-terms-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit"><span class="btn-label">Set my place</span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or">or</div>
+    <div class="socials">
+      <button type="button" class="btn-soft" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-soft" data-go="home"><i class="ph-duotone ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">Been here before? <a href="#signin" class="link" data-go="signin">Sign in</a></p>
+</section>
+
+<!-- ======================= FORGOT ======================= -->
+<section class="screen" data-screen="forgot" aria-labelledby="fp-title">
+  <div class="brand">
+    <button class="back patch oat" data-go="signin" aria-label="Back to sign in"><i class="ph-duotone ph-arrow-left"></i></button>
+  </div>
+  <div data-when="form">
+    <div class="fp-art">
+      <div class="disc patch rose"></div>
+      <img class="float" data-depth="8" src="../../assets/plush/logo.webp" alt="" style="width:118px; --rot:-4deg" width="160" height="204">
+    </div>
+    <div style="padding:0 var(--sp-6) 20px">
+      <h1 class="display" id="fp-title" style="font-size:34px">Lost the <em>key?</em></h1>
+      <p class="lede">No fuss. Tell us your email and we’ll post a fresh link to let you back in.</p>
+    </div>
+    <form class="patch form-patch shake-target" data-form="forgot">
+      <div class="field">
+        <label for="fp-email">Email</label>
+        <div class="control"><i class="ph-duotone ph-envelope-simple" aria-hidden="true"></i>
+          <input id="fp-email" type="email" autocomplete="email" required value="sam.rivera@mail.com" placeholder="you@example.com" data-demo-bad="sam.rivera@mail" aria-describedby="fp-email-err"></div>
+        <p class="field-error" id="fp-email-err" role="alert"></p>
+      </div>
+      <button class="btn" type="submit" style="margin-top:8px"><span class="btn-label">Send the link</span><span class="spinner" aria-hidden="true"></span></button>
+    </form>
+    <p class="foot">Found it? <a href="#signin" class="link" data-go="signin">Back to sign in</a></p>
+  </div>
+
+  <div data-when="sent" aria-live="polite">
+    <div class="sent-art">
+      <div class="envelope patch oat float" style="position:relative"><span class="heart"><i class="ph-fill ph-heart"></i></span></div>
+      <img class="float b" src="../../assets/plush/depth-3.webp" alt="" style="right:70px; top:24px; width:54px; --rot:20deg" width="220" height="214">
+    </div>
+    <div style="padding:0 var(--sp-6)">
+      <p class="kicker">Posted</p>
+      <h2 class="display" style="margin-top:12px; font-size:36px">Check your <em>inbox.</em></h2>
+      <p class="lede">A reset link is on its way to<br><span class="sent-chip patch oat" data-sent-email>sam.rivera@mail.com</span><br>It keeps for 15 minutes.</p>
+    </div>
+    <div class="patch form-patch" style="margin-top:22px">
+      <a class="btn" href="#" onclick="return false"><span class="btn-label"><i class="ph-duotone ph-envelope-open" aria-hidden="true"></i> Open my email</span></a>
+      <button type="button" class="resend" data-resend data-seconds="30"><span class="spool" aria-hidden="true"></span><span>Send again in <span data-count>0:30</span></span></button>
+    </div>
+    <p class="foot"><button type="button" class="link" data-reset-state>Try another email</button></p>
+  </div>
+</section>
+
+<!-- ======================= HOME ======================= -->
+<section class="screen home" data-screen="home" aria-labelledby="home-title">
+  <div class="home-top">
+    <span class="addr patch oat"><i class="ph-fill ph-house-line" style="color:var(--terra)" aria-hidden="true"></i>Elm Street, No. 14 <i class="ph-duotone ph-caret-down" aria-hidden="true"></i></span>
+    <button class="avatar patch sage" aria-label="Profile, Sam Rivera">S</button>
+  </div>
+  <div class="home-greet">
+    <p class="kicker">Thursday evening</p>
+    <h1 class="display" id="home-title" style="margin-top:12px">Evening, Sam. <em>What’s for supper?</em></h1>
+  </div>
+
+  <article class="patch rose feature">
+    <p class="kicker" style="color:var(--terra-dk)">Tonight’s table</p>
+    <h2>Nonna Rosa’s lasagna</h2>
+    <p class="cook"><b>R</b>Rosa · 3 doors down · ready 7:30</p>
+    <div class="portions" aria-label="3 of 8 portions left"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><span style="margin-left:6px">3 left</span></div>
+    <button class="btn">Save me a plate</button>
+    <img src="../../assets/plush/home-lasagna.webp" alt="Felt lasagna slice" width="340" height="318">
+  </article>
+
+  <div class="sec-head"><h2>What are you craving?</h2></div>
+  <div class="badges" role="group" aria-label="Categories">
+    <button class="badge" aria-pressed="true"><span class="disc patch oat"><img src="../../assets/plush/icon-soup.webp" alt="" width="128" height="146"></span>Soups</button>
+    <button class="badge" aria-pressed="false"><span class="disc patch oat"><img src="../../assets/plush/icon-bread.webp" alt="" width="128" height="97"></span>Bakes</button>
+    <button class="badge" aria-pressed="false"><span class="disc patch oat"><img src="../../assets/plush/icon-salad.webp" alt="" width="128" height="115"></span>Greens</button>
+    <button class="badge" aria-pressed="false"><span class="disc patch oat"><img src="../../assets/plush/icon-pasta.webp" alt="" width="128" height="100"></span>Pasta</button>
+    <button class="badge" aria-pressed="false"><span class="disc patch oat"><img src="../../assets/plush/icon-cake.webp" alt="" width="128" height="141"></span>Sweets</button>
+    <button class="badge" aria-pressed="false"><span class="disc patch oat"><img src="../../assets/plush/icon-pie.webp" alt="" width="128" height="107"></span>Pies</button>
+  </div>
+
+  <div class="sec-head"><h2>Cooks on your street</h2><a href="#" class="link" style="font-size:14px">Map</a></div>
+  <div class="cooks">
+    <article class="patch cook-card">
+      <span class="pic patch sage"><img src="../../assets/plush/home-soup.webp" alt="Felt tomato soup bowl" width="340" height="355"></span>
+      <div><h3>Margo’s tomato soup</h3><p>With sourdough soldiers · $9</p><span class="tag"><i class="ph-fill ph-leaf" aria-hidden="true"></i>Vegetarian · 2 doors</span></div>
+      <button class="heart" aria-label="Save Margo’s tomato soup"><i class="ph-duotone ph-heart"></i></button>
+    </article>
+    <article class="patch cook-card">
+      <span class="pic patch oat"><img src="../../assets/plush/home-dumplings.webp" alt="Felt dumplings in a steamer basket" width="340" height="386"></span>
+      <div><h3>Mei’s pork dumplings</h3><p>Basket of 8 · $12</p><span class="tag"><i class="ph-fill ph-clock" aria-hidden="true"></i>Ready in 25 min</span></div>
+      <button class="heart" aria-label="Save Mei’s pork dumplings"><i class="ph-duotone ph-heart"></i></button>
+    </article>
+    <article class="patch cook-card">
+      <span class="pic patch rose"><img src="../../assets/plush/home-pancakes.webp" alt="Felt pancake stack" width="340" height="373"></span>
+      <div><h3>Ollie’s Sunday stack</h3><p>Berries &amp; brown butter · $8</p><span class="tag"><i class="ph-fill ph-sun" aria-hidden="true"></i>Breakfast all day</span></div>
+      <button class="heart" aria-label="Save Ollie’s Sunday stack"><i class="ph-duotone ph-heart"></i></button>
+    </article>
+  </div>
+
+  <nav class="tabbar patch oat" role="tablist" aria-label="Main">
+    <button role="tab" aria-selected="true"><i class="ph-duotone ph-house-line"></i>Home</button>
+    <button role="tab" aria-selected="false"><i class="ph-duotone ph-map-trifold"></i>Nearby</button>
+    <button role="tab" aria-selected="false"><i class="ph-duotone ph-cooking-pot"></i>Orders</button>
+    <button role="tab" aria-selected="false"><i class="ph-duotone ph-heart"></i>Saved</button>
+    <button role="tab" aria-selected="false"><i class="ph-duotone ph-user"></i>Me</button>
+  </nav>
+</section>
+
+</div>
+<script src="../../shared/app.js"></script>
+<script>
+  document.querySelectorAll('.badge').forEach((c) => c.addEventListener('click', () => document.querySelectorAll('.badge').forEach((x) => x.setAttribute('aria-pressed', String(x === c)))));
+</script>
+</body>
+</html>

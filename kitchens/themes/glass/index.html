@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orbyt — Futuristic Glass</title>
+<meta name="theme-color" content="#070B1A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ======================= SIGN IN ======================= -->
+<section class="screen" data-screen="signin" aria-labelledby="si-title">
+  <div class="topline">
+    <img src="../../assets/glass/logo.webp" alt="" width="160" height="102">
+    <span class="wordmark">ORBYT</span>
+    <span class="status glass mono"><span class="dot"></span>24 drones live</span>
+  </div>
+  <div class="si-stage">
+    <div class="halo"></div>
+    <img class="float c" data-depth="16" src="../../assets/glass/depth-1.webp" alt="" style="left:18px; top:20px; width:64px; --rot:-20deg" width="220" height="205">
+    <img class="hero float" data-depth="7" src="../../assets/glass/hero.webp" alt="Iridescent glass cloche hovering with a glowing orb inside" width="560" height="443">
+    <img class="float b" data-depth="22" src="../../assets/glass/depth-3.webp" alt="" style="left:33%; top:64px; width:40px; --rot:24deg" width="220" height="220">
+    <div class="si-copy">
+      <p class="mono">02:14 AM · avg drop 14 min</p>
+      <h1 class="display" id="si-title" style="margin-top:12px">Dinner, delivered <b>from orbit.</b></h1>
+    </div>
+  </div>
+
+  <img class="float b" data-depth="-10" src="../../assets/glass/depth-2.webp" alt="" style="right:-18px; top:392px; width:92px; z-index:0" width="220" height="220">
+  <form class="glass panel shake-target" data-form="signin" data-next="home">
+    <div class="field">
+      <label for="si-id">Email or phone</label>
+      <div class="control"><i class="ph-light ph-at" aria-hidden="true"></i>
+        <input id="si-id" type="text" inputmode="email" autocomplete="username" required data-kind="email-or-phone" data-demo-bad="sam@orbyt" value="sam.rivera@mail.com" placeholder="you@domain.com" aria-describedby="si-id-err"></div>
+      <p class="field-error" id="si-id-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <div class="row-between"><label for="si-pw">Password</label><a href="#forgot" class="link mono" data-go="forgot" style="letter-spacing:.06em; text-transform:none; font-size:12px; color:var(--cyan)">Forgot password?</a></div>
+      <div class="control"><i class="ph-light ph-key" aria-hidden="true"></i>
+        <input id="si-pw" type="password" autocomplete="current-password" required data-minlength="6" value="nightowl2am" placeholder="Your password" aria-describedby="si-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-light ph-eye"></i><i class="ph-light ph-eye-slash"></i></button></div>
+      <p class="field-error" id="si-pw-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit" style="margin-top:20px"><span class="btn-label">Sign in <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or mono">or continue with</div>
+    <div class="socials">
+      <button type="button" class="btn-ghost glass" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-ghost glass" data-go="home"><i class="ph-light ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">First night here? <a href="#signup" class="link" data-go="signup">Create an account</a></p>
+</section>
+
+<!-- ======================= SIGN UP ======================= -->
+<section class="screen" data-screen="signup" aria-labelledby="su-title">
+  <div class="topline">
+    <button class="back glass" data-go="signin" aria-label="Back to sign in"><i class="ph-light ph-arrow-left"></i></button>
+    <span class="mono" style="margin-left:auto">Step 01 / 02</span>
+  </div>
+  <div class="su-head">
+    <img class="float" data-depth="14" src="../../assets/glass/depth-1.webp" alt="" style="--rot:-14deg" width="220" height="205">
+    <p class="mono">New pilot</p>
+    <h1 class="display" id="su-title" style="margin-top:10px; max-width:250px">Get on the <b>night list.</b></h1>
+    <p class="lede" style="max-width:270px">First drop is on us. Kitchens open till 4 AM.</p>
+  </div>
+  <form class="glass panel shake-target" data-form="signup" data-next="home">
+    <div class="field">
+      <label for="su-name">Display name</label>
+      <div class="control"><i class="ph-light ph-user-circle" aria-hidden="true"></i>
+        <input id="su-name" type="text" autocomplete="name" required placeholder="Sam Rivera" data-msg-empty="We need something to call you" aria-describedby="su-name-err"></div>
+      <p class="field-error" id="su-name-err" role="alert"></p>
+    </div>
+    <div class="field">
+      <label for="su-email">Email</label>
+      <div class="control"><i class="ph-light ph-at" aria-hidden="true"></i>
+        <input id="su-email" type="email" autocomplete="email" required placeholder="you@domain.com" data-demo-bad="sam@orbyt" aria-describedby="su-email-err"></div>
+      <p class="field-error" id="su-email-err" role="alert"></p>
+    </div>
+    <div class="field" style="margin-bottom:10px">
+      <label for="su-pw">Password</label>
+      <div class="control"><i class="ph-light ph-key" aria-hidden="true"></i>
+        <input id="su-pw" type="password" autocomplete="new-password" required data-minlength="8" data-strength="su-meter" placeholder="8+ characters" aria-describedby="su-meter su-pw-err">
+        <button type="button" class="eye" data-toggle-pw aria-label="Show password" aria-pressed="false"><i class="ph-light ph-eye"></i><i class="ph-light ph-eye-slash"></i></button></div>
+      <p class="field-error" id="su-pw-err" role="alert"></p>
+    </div>
+    <div class="meter" id="su-meter" data-level="0" aria-live="polite" data-labels="Entropy · too short|Entropy · low|Entropy · fair|Entropy · high|Entropy · max" data-empty="Entropy · awaiting input">
+      <div class="meter-track"></div>
+      <div class="row-between"><span class="meter-label" data-meter-label></span><span class="meter-ticks" aria-hidden="true" style="gap:10px"><span>01</span><span>02</span><span>03</span><span>04</span></span></div>
+    </div>
+    <div class="field">
+      <label class="check" style="text-transform:none; letter-spacing:0; font:400 13px/1.45 var(--font-display); color:var(--ink-2)"><input type="checkbox" required data-msg="Accept the terms to continue" aria-describedby="su-terms-err"> <span>I accept the <a href="#" onclick="return false">Terms of Service</a> and <a href="#" onclick="return false">Privacy Policy</a>.</span></label>
+      <p class="field-error" id="su-terms-err" role="alert"></p>
+    </div>
+    <button class="btn" type="submit"><span class="btn-label">Create account <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span><span class="spinner" aria-hidden="true"></span></button>
+    <div class="or mono">or</div>
+    <div class="socials">
+      <button type="button" class="btn-ghost glass" data-go="home"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i>Apple</button>
+      <button type="button" class="btn-ghost glass" data-go="home"><i class="ph-light ph-google-logo" aria-hidden="true"></i>Google</button>
+    </div>
+  </form>
+  <p class="foot">Already flying with us? <a href="#signin" class="link" data-go="signin">Sign in</a></p>
+</section>
+
+<!-- ======================= FORGOT ======================= -->
+<section class="screen" data-screen="forgot" aria-labelledby="fp-title">
+  <div class="topline">
+    <button class="back glass" data-go="signin" aria-label="Back to sign in"><i class="ph-light ph-arrow-left"></i></button>
+    <span class="mono" style="margin-left:auto">Access recovery</span>
+  </div>
+  <div data-when="form">
+    <div class="fp-stage">
+      <div class="ring"></div><div class="ring r2"></div>
+      <img class="prism float" data-depth="10" src="../../assets/glass/depth-3.webp" alt="" style="position:relative; --rot:-18deg" width="220" height="220">
+    </div>
+    <div style="padding:0 var(--sp-6) 22px">
+      <h1 class="display" id="fp-title">Lost your <b>access key?</b></h1>
+      <p class="lede">Enter the email tied to your account. We’ll transmit a secure reset link. It works once and expires in 15 minutes.</p>
+    </div>
+    <form class="glass panel shake-target" data-form="forgot">
+      <div class="field">
+        <label for="fp-email">Email</label>
+        <div class="control"><i class="ph-light ph-at" aria-hidden="true"></i>
+          <input id="fp-email" type="email" autocomplete="email" required value="sam.rivera@mail.com" placeholder="you@domain.com" data-demo-bad="sam.rivera@mail" aria-describedby="fp-email-err"></div>
+        <p class="field-error" id="fp-email-err" role="alert"></p>
+      </div>
+      <button class="btn" type="submit" style="margin-top:8px"><span class="btn-label">Transmit reset link <i class="ph-light ph-paper-plane-tilt" aria-hidden="true"></i></span><span class="spinner" aria-hidden="true"></span></button>
+    </form>
+    <p class="foot">Remembered it? <a href="#signin" class="link" data-go="signin">Back to sign in</a></p>
+  </div>
+
+  <div data-when="sent" aria-live="polite">
+    <div class="sent-stage">
+      <span class="radar"></span><span class="radar"></span><span class="radar"></span>
+      <div class="sent-core glass"><i class="ph-light ph-envelope-simple-open" aria-hidden="true"></i></div>
+    </div>
+    <div style="padding:0 var(--sp-6)">
+      <p class="mono" style="color:var(--cyan)">Signal sent</p>
+      <h2 class="display" style="margin-top:10px">Check your <b>inbox.</b></h2>
+      <p class="lede">Reset link transmitted to<br><span class="code-chip" data-sent-email>sam.rivera@mail.com</span></p>
+    </div>
+    <div class="glass panel" style="margin-top:24px">
+      <a class="btn" href="#" onclick="return false"><span class="btn-label">Open mail app <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span></a>
+      <button type="button" class="resend" data-resend data-seconds="30"><span>Resend link</span><span data-count>0:30</span></button>
+      <div class="resend-bar"><i></i></div>
+    </div>
+    <p class="foot"><button type="button" class="link" data-reset-state>Use another email</button></p>
+  </div>
+</section>
+
+<!-- ======================= HOME ======================= -->
+<section class="screen home" data-screen="home" aria-labelledby="home-title">
+  <div class="home-top">
+    <img src="../../assets/glass/logo.webp" alt="" style="width:34px" width="160" height="102">
+    <div><p class="mono">Drop zone</p><p style="font-size:14px; font-weight:500; margin-top:3px">Pier 9 Lofts, Apt 1204 <i class="ph-light ph-caret-down" aria-hidden="true"></i></p></div>
+    <button class="avatar" aria-label="Profile, Sam Rivera">SR</button>
+  </div>
+  <div class="home-greet">
+    <p class="mono">02:14 · 11°C · clear skies</p>
+    <h1 class="display" id="home-title" style="margin-top:10px">Night owl, <b>Sam.</b></h1>
+  </div>
+
+  <article class="glass tracker" aria-label="Live order">
+    <div class="row-between">
+      <div><p class="mono">Drone ORB-7 · ETA</p><div class="eta" style="margin-top:8px">08:42<small>MIN</small></div></div>
+      <span class="live"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:#050816"></span>LIVE</span>
+    </div>
+    <div class="orbit" aria-hidden="true">
+      <div class="path"></div>
+      <div class="kitchen-pt"><span class="pt"><i class="ph-light ph-cooking-pot"></i></span>KITCHEN</div>
+      <div class="drone-dot"><img src="../../assets/glass/hero.webp" alt="" width="560" height="443"></div>
+      <div class="home-pt"><span class="pt"><i class="ph-fill ph-map-pin"></i></span>YOU</div>
+    </div>
+    <div class="prog"><i></i></div>
+    <p style="margin-top:10px"><b>Tonkotsu ramen + gyoza</b> from Neon Noodle Bar · 1.2 km out</p>
+  </article>
+
+  <div class="sec-head"><h2>Midnight menu</h2><a href="#" class="link mono" style="font-size:11px">View all</a></div>
+  <div class="rail">
+    <article class="dish">
+      <img src="../../assets/glass/home-sushi.webp" alt="Nigiri and maki on a slate plate" width="720" height="480">
+      <span class="tagline mono" style="color:var(--ink)">Chef’s pick</span>
+      <button class="add" aria-label="Add Omakase Drop to cart"><i class="ph-light ph-plus"></i></button>
+      <div class="meta glass"><h3>Omakase Drop</h3><div class="row-between"><span class="mono">Kuro · 18 min</span><span class="price">$34.00</span></div></div>
+    </article>
+    <article class="dish">
+      <img src="../../assets/glass/home-burger.webp" alt="Double smash burger with cheese" width="720" height="480">
+      <button class="add" aria-label="Add Double Smash to cart"><i class="ph-light ph-plus"></i></button>
+      <div class="meta glass"><h3>Double Smash</h3><div class="row-between"><span class="mono">Static Grill · 12 min</span><span class="price">$16.50</span></div></div>
+    </article>
+    <article class="dish">
+      <img src="../../assets/glass/home-poke.webp" alt="Salmon poke bowl with avocado" width="720" height="480">
+      <button class="add" aria-label="Add Salmon Poke to cart"><i class="ph-light ph-plus"></i></button>
+      <div class="meta glass"><h3>Salmon Poke</h3><div class="row-between"><span class="mono">Tide · 15 min</span><span class="price">$18.00</span></div></div>
+    </article>
+  </div>
+
+  <div class="sec-head"><h2>Open late near you</h2><span class="mono">Until 04:00</span></div>
+  <div class="glass list">
+    <div class="list-row"><img src="../../assets/glass/home-ramen.webp" alt="" width="720" height="480"><div><h3>Neon Noodle Bar</h3><span class="mono">Ramen · 4.9 ★ · 0.8 km</span></div><button class="go" aria-label="Open Neon Noodle Bar"><i class="ph-light ph-arrow-right"></i></button></div>
+    <div class="list-row"><img src="../../assets/glass/home-sushi.webp" alt="" width="720" height="480"><div><h3>Kuro Omakase</h3><span class="mono">Sushi · 4.8 ★ · 1.4 km</span></div><button class="go" aria-label="Open Kuro Omakase"><i class="ph-light ph-arrow-right"></i></button></div>
+  </div>
+
+  <nav class="tabbar glass" role="tablist" aria-label="Main">
+    <button role="tab" aria-selected="true"><i class="ph-light ph-planet"></i><i class="ph-fill ph-planet"></i>Home</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-magnifying-glass"></i><i class="ph-fill ph-magnifying-glass"></i>Search</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-navigation-arrow"></i><i class="ph-fill ph-navigation-arrow"></i>Track</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-bookmark-simple"></i><i class="ph-fill ph-bookmark-simple"></i>Saved</button>
+    <button role="tab" aria-selected="false"><i class="ph-light ph-user"></i><i class="ph-fill ph-user"></i>Me</button>
+  </nav>
+</section>
+
+</div>
+<script src="../../shared/app.js"></script>
+</body>
+</html>

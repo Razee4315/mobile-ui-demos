@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04040a">
+<title>Lumen · Sign in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/screen-base.css">
+<style>
+  :root {
+    --bg: #04040a; --ink: #f3f1ff; --muted: rgba(235,232,255,.56); --line: rgba(255,255,255,.1);
+    --glass: rgba(255,255,255,.045); --violet: #8b7bff; --cyan: #5ee2ff;
+  }
+  body { background: var(--bg); color: var(--ink); font: 400 15px/1.45 "Inter Tight", system-ui, sans-serif; display: flex; flex-direction: column; padding: var(--top) 24px var(--bottom); position: relative; }
+
+  /* Sky: the generated horizon, flipped so the glowing rim hangs from the top */
+  .sky { position: absolute; inset: 0 0 auto; height: 62%; background: url(../../assets/web/lumen-sky.webp) center 100% / cover; transform: scaleY(-1); opacity: .95; pointer-events: none;
+    -webkit-mask: linear-gradient(to top, #000 55%, transparent); mask: linear-gradient(to top, #000 55%, transparent); }
+  .stars { position: absolute; inset: 0; pointer-events: none; opacity: .7;
+    background-image: radial-gradient(1px 1px at 12% 38%, #fff 50%, transparent), radial-gradient(1px 1px at 78% 30%, #fff 50%, transparent), radial-gradient(1.5px 1.5px at 64% 52%, #cfd 50%, transparent), radial-gradient(1px 1px at 30% 58%, #fff 50%, transparent), radial-gradient(1px 1px at 88% 61%, #fff 50%, transparent), radial-gradient(1px 1px at 46% 70%, #fff 50%, transparent);
+    animation: twinkle 6s ease-in-out infinite alternate; }
+  @keyframes twinkle { to { opacity: .25; } }
+
+  header { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; height: 44px; }
+  .brand { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 19px; letter-spacing: -.4px; }
+  .brand svg { width: 28px; height: 28px; }
+  .lang { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); padding: 7px 12px; border: 1px solid var(--line); border-radius: 99px; background: rgba(255,255,255,.03); backdrop-filter: blur(10px); }
+  .lang .ico { width: 15px; height: 15px; }
+
+  /* Orb: absolutely placed, moves/shrinks between views */
+  .orb { --size: clamp(80px, calc(var(--content-top, 330px) - var(--head-bottom, 98px) - 34px), 210px);
+    position: absolute; left: 50%; top: calc((var(--head-bottom, 98px) + var(--content-top, 330px)) / 2 - 6px); width: var(--size); height: var(--size);
+    transform: translate(-50%, -50%); z-index: 1; transition: width 1s var(--ease), height 1s var(--ease), top 1s var(--ease); pointer-events: none; }
+  .orb-in { width: 100%; height: 100%; animation: float 7s ease-in-out infinite; }
+  .orb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .orb .glow { filter: blur(34px) saturate(1.4); opacity: .75; transform: scale(1.15); }
+  .orb .core { animation: spinslow 40s linear infinite; }
+  @keyframes spinslow { to { transform: rotate(360deg); } }
+  .orb::after { content: ""; position: absolute; left: 15%; right: 15%; bottom: -46px; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(139,123,255,.45), transparent); filter: blur(4px); animation: shadow 7s ease-in-out infinite; }
+  @keyframes shadow { 50% { transform: scaleX(.8); opacity: .6; } }
+  .orb::after { bottom: -18%; }
+
+  .panes { margin-top: auto; position: relative; z-index: 2; }
+  .pane { align-self: end; }
+
+  h1 { font: 400 40px/1.02 "Instrument Serif", serif; letter-spacing: -.6px; margin: 0 0 10px; }
+  h1 em { font-style: italic; background: linear-gradient(100deg, #c9c1ff 10%, var(--cyan) 60%, #f0a8ff); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 4px; }
+  .sub { color: var(--muted); margin: 0 0 22px; font-size: 14.5px; max-width: 300px; }
+
+  form { display: grid; gap: 10px; }
+  .field { height: 56px; border-radius: 18px; background: var(--glass); border: 1px solid var(--line); padding: 0 16px; gap: 12px; color: var(--muted); transition: border-color .3s, background .3s, box-shadow .3s; backdrop-filter: blur(14px); }
+  .field:focus-within { border-color: rgba(139,123,255,.7); background: rgba(139,123,255,.08); box-shadow: 0 0 0 4px rgba(139,123,255,.12), 0 8px 30px -10px rgba(94,226,255,.35); color: var(--ink); }
+  .field input { color: var(--ink); font-size: 15.5px; }
+  .field input::placeholder { color: rgba(235,232,255,.4); }
+  .field .link { font-size: 13px; color: #b3a9ff; text-decoration: none; white-space: nowrap; }
+  .eye { color: var(--muted); display: grid; place-items: center; }
+
+  .strength { color: var(--ink); --meter: linear-gradient(90deg, var(--violet), var(--cyan)); padding: 2px 4px 0; }
+  .strength .strength-label { color: var(--muted); }
+
+  .primary { margin-top: 6px; height: 58px; border-radius: 18px; background: #f5f3ff; color: #0b0a1a; font-weight: 600; font-size: 16px; display: grid; place-items: center; box-shadow: 0 0 0 1px rgba(255,255,255,.4), 0 14px 40px -12px rgba(139,123,255,.75), inset 0 -2px 0 rgba(11,10,26,.08); transition: transform .2s var(--ease), box-shadow .3s; overflow: hidden; }
+  .primary:active { transform: scale(.98); }
+  .primary::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(139,123,255,.25) 45%, rgba(94,226,255,.25) 55%, transparent 70%); transform: translateX(-100%); animation: sheen 4.5s var(--ease) infinite 1.5s; }
+  @keyframes sheen { 40%, 100% { transform: translateX(100%); } }
+  .primary.done { background: #c8ffe8; }
+
+  .or { display: flex; align-items: center; gap: 12px; color: rgba(235,232,255,.38); font-size: 12px; letter-spacing: .8px; text-transform: uppercase; margin: 18px 0 14px; }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .socials button { height: 52px; border-radius: 16px; border: 1px solid var(--line); background: var(--glass); display: grid; place-items: center; color: var(--ink); transition: background .3s, transform .2s; }
+  .socials button:active { transform: scale(.96); }
+  .socials .ico { width: 21px; height: 21px; }
+  .terms { font-size: 12px; color: rgba(235,232,255,.42); margin: 2px 4px 0; }
+  .terms a { color: var(--muted); }
+  .foot { text-align: center; color: var(--muted); font-size: 14px; margin: 20px 0 6px; }
+  .foot a { color: var(--ink); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(139,123,255,.6); padding-bottom: 1px; }
+</style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="rise" style="--d:0">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9c1ff"/><stop offset=".55" stop-color="#5ee2ff"/><stop offset="1" stop-color="#f0a8ff"/></linearGradient></defs>
+        <circle cx="16" cy="16" r="14" fill="none" stroke="url(#lg)" stroke-width="1.6"/>
+        <path d="M20.5 7.5a9 9 0 1 0 4 12.6A7.4 7.4 0 0 1 20.5 7.5Z" fill="url(#lg)"/>
+        <path d="M23.5 5.5c.2 1.4 1 2.2 2.4 2.4-1.4.2-2.2 1-2.4 2.4-.2-1.4-1-2.2-2.4-2.4 1.4-.2 2.2-1 2.4-2.4Z" fill="#fff"/>
+      </svg>
+      lumen
+    </div>
+    <button class="lang" data-fake><i data-icon="globe"></i>EN</button>
+  </header>
+
+  <div class="orb" aria-hidden="true">
+    <div class="rise" style="--d:1;height:100%">
+      <div class="orb-in">
+        <img class="glow" src="../../assets/web/lumen-orb.webp" width="900" height="896" alt="">
+        <img class="core" src="../../assets/web/lumen-orb.webp" width="900" height="896" alt="">
+      </div>
+    </div>
+  </div>
+
+  <main class="panes">
+    <!-- LOGIN -->
+    <section class="pane login" aria-label="Sign in">
+      <h1 class="rise" style="--d:2">Your dreams,<br><em>remembered.</em></h1>
+      <p class="sub rise" style="--d:3">Whisper them at dawn. Lumen turns half-memories into a journal you'll actually keep.</p>
+      <form class="rise" style="--d:4">
+        <label class="field"><i data-icon="mail"></i><span class="sr">Email</span><input type="email" placeholder="Email address" autocomplete="email"></label>
+        <label class="field"><i data-icon="lock"></i><span class="sr">Password</span><input type="password" placeholder="Password" autocomplete="current-password"><a class="link" href="#" data-fake>Forgot?</a></label>
+        <button class="primary" type="submit"><span class="btn-label">Continue <i data-icon="arrow"></i></span></button>
+      </form>
+      <div class="rise" style="--d:5">
+        <div class="or">or</div>
+        <div class="socials">
+          <button data-fake aria-label="Continue with Apple"><i data-icon="apple"></i></button>
+          <button data-fake aria-label="Continue with Google"><i data-icon="google"></i></button>
+          <button data-fake aria-label="Use a passkey"><i data-icon="faceid"></i></button>
+        </div>
+        <p class="foot">New to Lumen? <a href="#" data-go="signup">Create an account</a></p>
+      </div>
+    </section>
+
+    <!-- SIGN UP -->
+    <section class="pane signup" aria-label="Create account">
+      <h1>Begin your<br><em>night archive.</em></h1>
+      <p class="sub">Free for your first 30 dreams. No alarm clocks harmed.</p>
+      <form>
+        <label class="field"><i data-icon="user"></i><span class="sr">Name</span><input type="text" placeholder="What should we call you?" autocomplete="name"></label>
+        <label class="field"><i data-icon="mail"></i><span class="sr">Email</span><input type="email" placeholder="Email address" autocomplete="email"></label>
+        <label class="field"><i data-icon="lock"></i><span class="sr">Password</span><input type="password" placeholder="Create a password" autocomplete="new-password" data-strength>
+          <button class="eye" data-eye aria-label="Show password" type="button"><i data-icon="eye"></i><i data-icon="eye-off"></i></button></label>
+        <div class="strength" data-score="0"><i></i><i></i><i></i><i></i><span class="strength-label"></span></div>
+        <button class="primary" type="submit"><span class="btn-label">Create account <i data-icon="arrow"></i></span></button>
+        <p class="terms">By continuing you agree to our <a href="#" data-fake>Terms</a> and <a href="#" data-fake>Privacy Policy</a>.</p>
+      </form>
+      <div class="or">or</div>
+      <div class="socials">
+        <button data-fake aria-label="Sign up with Apple"><i data-icon="apple"></i></button>
+        <button data-fake aria-label="Sign up with Google"><i data-icon="google"></i></button>
+        <button data-fake aria-label="Use a passkey"><i data-icon="faceid"></i></button>
+      </div>
+      <p class="foot">Already dreaming with us? <a href="#" data-go="login">Sign in</a></p>
+    </section>
+  </main>
+
+  <script src="../../shared/icons.js"></script>
+  <script src="../../shared/screen.js"></script>
+</body>
+</html>

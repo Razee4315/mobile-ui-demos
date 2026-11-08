@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign-in Studies · Series 02</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="description" content="Five motion-first, light and minimal mobile sign-in concepts, live in iPhone and Android mockups.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/devices.css">
+<link rel="stylesheet" href="../shared/showcase.css">
+<style>
+  :root { --stage: #f7f4ef; --ink: #1d1c1a; }
+  body.on-light { --line: rgba(0,0,0,.1); }
+  .top a { opacity: .7; }
+  .hero { padding: clamp(48px, 9vw, 130px) var(--gutter) clamp(36px, 5vw, 70px); max-width: 1400px; margin: 0 auto; position: relative; }
+  .hero .eyebrow { margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(50px, 9vw, 140px); line-height: .9; letter-spacing: -.05em; margin: 0 0 26px; font-weight: 700; }
+  .hero h1 em { font-style: normal; background: linear-gradient(90deg, #ff9a76, #b9a8ff 45%, #7fd0b4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .lede { font-size: clamp(17px, 1.6vw, 21px); max-width: 720px; opacity: .78; margin: 0; }
+  .blobs { position: absolute; right: var(--gutter); top: 40px; width: min(36vw, 420px); aspect-ratio: 1; pointer-events: none; z-index: -1; }
+  .blobs i { position: absolute; border-radius: 50%; filter: blur(40px); opacity: .7; animation: float 12s ease-in-out infinite alternate; }
+  .blobs i:nth-child(1) { width: 60%; height: 60%; left: 0; top: 10%; background: #ffcaa8; }
+  .blobs i:nth-child(2) { width: 55%; height: 55%; right: 0; top: 0; background: #d6d0ff; animation-delay: -4s; }
+  .blobs i:nth-child(3) { width: 50%; height: 50%; left: 25%; bottom: 0; background: #bfe9dc; animation-delay: -8s; }
+  @keyframes float { to { transform: translate(20px, 30px) scale(1.1); } }
+  .board { display: flex; gap: 12px; overflow-x: auto; padding: 0 var(--gutter) 24px; scrollbar-width: thin; }
+  .board img { height: 200px; width: auto; border-radius: 12px; flex: none; }
+  .board-label { max-width: 1400px; margin: 0 auto; padding: 0 var(--gutter) 14px; display: flex; justify-content: space-between; font-family: "JetBrains Mono", monospace; font-size: 12px; opacity: .6; }
+
+  .concept { background: var(--stage); color: var(--ink); padding: clamp(56px, 8vw, 110px) 0; --line: rgba(0,0,0,.1); }
+  .concept .wrap { max-width: 1400px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+  .concept.flip .copy { order: 2; }
+  .concept .no { font-family: "JetBrains Mono", monospace; font-size: 12.5px; opacity: .6; letter-spacing: .5px; text-transform: uppercase; }
+  .concept h2 { font-size: clamp(54px, 8vw, 112px); line-height: .9; letter-spacing: -.045em; margin: 12px 0 18px; }
+  .concept p { font-size: 17.5px; opacity: .82; max-width: 540px; margin: 0 0 22px; }
+  .try { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 8px; font-size: 14.5px; }
+  .try li { display: flex; gap: 10px; align-items: baseline; }
+  .try li::before { content: "→"; font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--accent); filter: brightness(.75); }
+  .meta { display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin-bottom: 28px; }
+  .open { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 99px; background: var(--ink); color: var(--stage); text-decoration: none; font-weight: 600; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+  .open:hover { transform: translateY(-3px); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 44px); align-items: end; }
+  .pair figure { margin: 0; }
+  .pair figcaption { text-align: center; margin-top: 14px; font-family: "JetBrains Mono", monospace; font-size: 11.5px; opacity: .55; }
+  @media (max-width: 900px) { .concept .wrap { grid-template-columns: 1fr; } .concept.flip .copy { order: 0; } }
+  footer { padding: 48px var(--gutter) 64px; max-width: 1400px; margin: 0 auto; font-size: 14px; opacity: .6; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+</style>
+</head>
+<body class="on-light">
+  <nav class="top"><a href="../index.html">← All demos</a><span class="pager"><span>Series 02 · 5 concepts</span></span></nav>
+  <header class="hero">
+    <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <p class="eyebrow">Series 02 — motion first</p>
+    <h1>Sign in,<br>but <em>alive.</em></h1>
+    <p class="lede">Five new niches (an AI chat companion, a support desk, a team workspace, a motion tool and an AI image studio) in light, quiet colour. Every screen reacts to touch: eyes follow you, shapes scatter, curves change how the page moves. Use the phones below; they're live.</p>
+  </header>
+
+  <div class="board-label local-only" hidden><span>Moodboard · 27 picked from 123 Pinterest pins</span><span>scroll →</span></div>
+  <div class="board local-only" id="board" hidden></div>
+
+  <main id="concepts"></main>
+  <footer><span>Sign-in Studies · Series 02 · concepts only</span><span>Open any screen on a real phone: series-2/concepts/&lt;name&gt;/screen.html</span></footer>
+
+  <script src="shared/concepts.js"></script>
+  <script>
+    const picks = ['018_a21c6967','002_d2f91f9f','100_a1b30946','031_f44c5aa2','121_e363230f','086_7033c910','099_b0dcc39a','030_4ce881ed','115_f8370460','105_6b20a8db','090_43f4a811','102_0b6b810a','087_81bdcb70','001_83c37ecc','104_7ebd5a4c','060_632e9454','043_855770e7','074_e7f5b3e1','010_a1333fc5','101_fc0a5f15','026_408a9b5c','023_a5c9faec','112_32edff28','080_ead22af5','005_7fbccfa9','059_38a24577','014_7eea3228'];
+    document.getElementById('board').innerHTML = picks.map(p => `<img src="../references/series2/picks/${p}.jpg" alt="Pinterest reference">`).join('');
+    document.getElementById('concepts').innerHTML = window.CONCEPTS.map((c, i) => `
+      <section class="concept ${i % 2 ? 'flip' : ''}" style="--stage:${c.stage};--ink:${c.ink};--accent:${c.accent}" id="${c.id}">
+        <div class="wrap">
+          <div class="copy">
+            <div class="no">${c.no} — ${c.kind}</div>
+            <h2>${c.name}</h2>
+            <p>${c.pitch}</p>
+            <ul class="try">${c.try.map(t => `<li>${t}</li>`).join('')}</ul>
+            <div class="meta">
+              <div class="swatches">${c.palette.map(h => `<span class="sw" style="--c:${h}"><i></i>${h}</span>`).join('')}</div>
+              <div><span class="k">Type</span>&nbsp;&nbsp;${c.fonts}</div>
+            </div>
+            <a class="open" href="concept.html?c=${c.id}">See all 4 screens →</a>
+          </div>
+          <div class="pair">
+            <figure><div class="device" data-os="ios" data-bar="dark" data-src="concepts/${c.id}/screen.html?view=login" data-label="${c.name} sign in on iPhone"></div><figcaption>iPhone · Sign in</figcaption></figure>
+            <figure><div class="device" data-os="android" data-bar="dark" data-src="concepts/${c.id}/screen.html?view=signup" data-label="${c.name} sign up on Android"></div><figcaption>Android · Sign up</figcaption></figure>
+          </div>
+        </div>
+      </section>`).join('');
+  </script>
+  <script src="../shared/devices.js"></script>
+</body>
+</html>
