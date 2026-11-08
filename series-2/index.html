@@ -63,10 +63,11 @@
   <main id="concepts"></main>
   <footer><span>Sign-in Studies · Series 02 · concepts only</span><span>Open any screen on a real phone: series-2/concepts/&lt;name&gt;/screen.html</span></footer>
 
+  <script src="../shared/moodboard.js"></script>
   <script src="shared/concepts.js"></script>
   <script>
     const picks = ['018_a21c6967','002_d2f91f9f','100_a1b30946','031_f44c5aa2','121_e363230f','086_7033c910','099_b0dcc39a','030_4ce881ed','115_f8370460','105_6b20a8db','090_43f4a811','102_0b6b810a','087_81bdcb70','001_83c37ecc','104_7ebd5a4c','060_632e9454','043_855770e7','074_e7f5b3e1','010_a1333fc5','101_fc0a5f15','026_408a9b5c','023_a5c9faec','112_32edff28','080_ead22af5','005_7fbccfa9','059_38a24577','014_7eea3228'];
-    document.getElementById('board').innerHTML = picks.map(p => `<img src="../references/series2/picks/${p}.jpg" alt="Pinterest reference">`).join('');
+    moodboard(document.getElementById('board'), picks.map(p => '../references/series2/picks/' + p + '.jpg'));
     document.getElementById('concepts').innerHTML = window.CONCEPTS.map((c, i) => `
       <section class="concept ${i % 2 ? 'flip' : ''}" style="--stage:${c.stage};--ink:${c.ink};--accent:${c.accent}" id="${c.id}">
         <div class="wrap">

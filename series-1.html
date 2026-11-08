@@ -61,10 +61,11 @@
 
   <footer><span>Sign-in Studies · concepts only, no real apps</span><span>Open any screen on a real phone: concepts/&lt;name&gt;/screen.html</span></footer>
 
+  <script src="shared/moodboard.js"></script>
   <script src="shared/concepts.js"></script>
   <script>
     const picks = ['38_22f87b31','01_59df1435','28_b89b6df1','73_2e7439c9','30_c8511ef2','21_a9ed078c','40_3f6e3981','71_16d6222b','82_5d30be62','44_925274f8','74_5c4d305b','25_cbe9e647','48_60017502','57_7d208fc8','86_74280586','23_090b18a1','16_94bafa4b'];
-    document.getElementById('board').innerHTML = picks.map(p => `<img src="references/picks/${p}.jpg" alt="Pinterest reference">`).join('');
+    moodboard(document.getElementById('board'), picks.map(p => 'references/picks/' + p + '.jpg'));
     document.getElementById('concepts').innerHTML = window.CONCEPTS.map((c, i) => `
       <section class="concept ${c.bar === 'light' ? 'on-dark' : 'on-light'} ${i % 2 ? 'flip' : ''}" style="--stage:${c.stage};--ink:${c.ink};--accent:${c.accent}" id="${c.id}">
         <div class="wrap">
